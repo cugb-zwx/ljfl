@@ -63,7 +63,7 @@
         </Logger>
 
         <!-- 应用的日志级别  -->
-        <Logger name="youxiang" level="INFO" includeLocation="true" additivity="false">
+        <Logger name="ljfl" level="INFO" includeLocation="true" additivity="false">
             <appender-ref ref="Stdout"/>
             <appender-ref ref="AllLog"/>
             <!--<appender-ref ref="WarnLog"/>-->
