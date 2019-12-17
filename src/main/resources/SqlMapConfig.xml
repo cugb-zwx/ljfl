@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <!-- 全局映射器启用缓存 -->
+        <setting name="cacheEnabled" value="false" />
+        <!-- 设置关联对象加载的形态，此处为按需加载字段(加载字段由SQL指 定)，不会加载关联表的所有字段，以提高性能 -->
+        <setting name="aggressiveLazyLoading" value="false" />
+        <!-- 允许JDBC支持生成的键。需要适合的驱动。如果设置为true则这个设置强制生成的键被使用，尽管一些驱动拒绝兼容但仍然有效（比如Derby） -->
+        <setting name="useGeneratedKeys" value="false" />
+        <!-- 给予被嵌套的resultMap以字段-属性的映射支持 -->
+        <setting name="autoMappingBehavior" value="PARTIAL" />
+        <!-- 对于批量更新操作缓存SQL以提高性能 -->
+        <setting name="defaultExecutorType" value="REUSE" />
+        <!-- 列名自动映射 -->
+        <setting name="mapUnderscoreToCamelCase" value="true" />
+        <!-- null值数据库映射 -->
+        <setting name="jdbcTypeForNull" value="NULL" />
+        <!-- 单位是秒-->
+        <setting name="defaultStatementTimeout" value="15"/>
+        <!-- 列名自动映射 -->
+        <setting name="mapUnderscoreToCamelCase" value="true" />
+    </settings>
+</configuration>
