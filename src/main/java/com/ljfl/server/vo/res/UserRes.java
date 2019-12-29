@@ -1,6 +1,6 @@
 package com.ljfl.server.vo.res;
 
-import com.ljfl.server.vo.BaseVO;
+import com.ljfl.server.vo.base.BaseVO;
 import io.swagger.annotations.ApiModelProperty;
 
 /**

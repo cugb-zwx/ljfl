@@ -25,4 +25,8 @@ public class UserBiz {
     public UserDTO getUser(UserDTO dto) {
         return userService.getUser(dto);
     }
+
+    public boolean isHasUser(UserDTO dto) {
+        return userService.isHasUser(dto);
+    }
 }

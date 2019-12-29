@@ -1,4 +1,4 @@
-package com.ljfl.server.vo;
+package com.ljfl.server.vo.base;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;

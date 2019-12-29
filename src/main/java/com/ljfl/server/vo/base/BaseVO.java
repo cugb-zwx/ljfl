@@ -1,4 +1,6 @@
-package com.ljfl.server.vo;
+package com.ljfl.server.vo.base;
+
+import com.ljfl.server.vo.base.BaseObject;
 
 /**
  * 所有req和Resp的父类

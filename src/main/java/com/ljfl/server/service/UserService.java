@@ -11,4 +11,6 @@ public interface UserService {
     void addUser(UserDTO dto);
 
     UserDTO getUser(UserDTO dto);
+
+    boolean isHasUser(UserDTO dto);
 }

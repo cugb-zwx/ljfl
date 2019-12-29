@@ -37,4 +37,12 @@ public class UserServiceImpl implements UserService {
         UserPO po = userPOManualMapper.getUser(openid);
         return UserConverter.poToDTO(po);
     }
+
+    @Override
+    public boolean isHasUser(UserDTO dto) {
+        String openid = dto.getOpenid();
+        long count = userPOManualMapper.countUser(openid);
+        if (count > 0) return true;
+        return false;
+    }
 }

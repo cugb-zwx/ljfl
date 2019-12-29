@@ -10,4 +10,6 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface UserPOManualMapper {
     UserPO getUser(@Param("openid") String openid);
+
+    long countUser(@Param("openid") String openid);
 }
