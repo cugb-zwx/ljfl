@@ -1,6 +1,5 @@
 package com.ljfl.server.dao.mapper.manual;
 
-import com.ljfl.server.domain.po.UserPO;
 import org.apache.ibatis.annotations.Param;
 
 /**
@@ -9,7 +8,6 @@ import org.apache.ibatis.annotations.Param;
  * @CreateDate: 2019/12/29 11:47
  */
 public interface UserPOManualMapper {
-    UserPO getUser(@Param("openid") String openid);
 
     long countUser(@Param("openid") String openid);
 }

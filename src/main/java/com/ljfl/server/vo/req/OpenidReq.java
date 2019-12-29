@@ -8,7 +8,7 @@ import io.swagger.annotations.ApiModelProperty;
  * @Author: zwx
  * @CreateDate: 2019/12/13 20:50
  */
-public class GetUserReq extends BaseVO {
+public class OpenidReq extends BaseVO {
     private static final long serialVersionUID = 3939302248038510574L;
     @ApiModelProperty("微信openid")
     private String openid;

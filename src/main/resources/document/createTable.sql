@@ -125,3 +125,15 @@ CREATE TABLE `user_garbage` (
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='用户垃圾关联表';
+
+-- ----------------------------
+-- Table structure for user_sign
+-- ----------------------------
+DROP TABLE IF EXISTS `user_sign`;
+CREATE TABLE `user_garbage` (
+  `id` varchar(20) COLLATE utf8_unicode_ci NOT NULL COMMENT '唯一表示',
+  `user_id` varchar(20) COLLATE utf8_unicode_ci NOT NULL COMMENT '用户ID',
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='用户签到圾关联表';

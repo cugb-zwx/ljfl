@@ -33,8 +33,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDTO getUser(UserDTO dto) {
-        String openid = dto.getOpenid();
-        UserPO po = userPOManualMapper.getUser(openid);
+        String id = dto.getId();
+        UserPO po = userPOMapper.selectByPrimaryKey(id);
         return UserConverter.poToDTO(po);
     }
 

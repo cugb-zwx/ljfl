@@ -4,7 +4,8 @@ import com.ljfl.server.common.utils.DateUtil;
 import com.ljfl.server.domain.po.UserPO;
 import com.ljfl.server.dto.UserDTO;
 import com.ljfl.server.vo.req.AddUserReq;
-import com.ljfl.server.vo.req.GetUserReq;
+import com.ljfl.server.vo.req.IdReq;
+import com.ljfl.server.vo.req.OpenidReq;
 import com.ljfl.server.vo.res.UserRes;
 
 /**
@@ -33,12 +34,21 @@ public class UserConverter {
         return userDTO;
     }
 
-    public static UserDTO reqToDTO(GetUserReq req) {
+    public static UserDTO reqToDTO(OpenidReq req) {
         if (req == null) {
             return null;
         }
         UserDTO userDTO = new UserDTO();
         userDTO.setOpenid(req.getOpenid());
+        return userDTO;
+    }
+
+    public static UserDTO reqToDTO(IdReq req) {
+        if (req == null) {
+            return null;
+        }
+        UserDTO userDTO = new UserDTO();
+        userDTO.setId(req.getId());
         return userDTO;
     }
 

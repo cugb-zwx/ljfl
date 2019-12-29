@@ -29,12 +29,6 @@
     <sql id="Blob_Column_List">
     note
   </sql>
-    <select id="getUser" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List"/>,
-        <include refid="Blob_Column_List"/>
-        from user where openid = #{openid,jdbcType=VARCHAR}
-    </select>
     <select id="countUser" resultType="java.lang.Long">
         select count(*) from user  where openid = #{openid,jdbcType=VARCHAR}
     </select>
