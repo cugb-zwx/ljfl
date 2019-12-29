@@ -1,7 +1,7 @@
 package com.ljfl.server.biz;
 
-import com.ljfl.server.dto.CustomerOrderDTO;
-import com.ljfl.server.service.CustomerOrderService;
+import com.ljfl.server.dto.UserDTO;
+import com.ljfl.server.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,12 +13,16 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional
-public class CustomerOrderBiz {
+public class UserBiz {
 
     @Autowired
-    private CustomerOrderService customerOrderService;
+    private UserService userService;
 
-    public void create(CustomerOrderDTO dto) {
-        customerOrderService.create(dto);
+    public void addUser(UserDTO dto) {
+        userService.addUser(dto);
+    }
+
+    public UserDTO getUser(UserDTO dto) {
+        return userService.getUser(dto);
     }
 }
