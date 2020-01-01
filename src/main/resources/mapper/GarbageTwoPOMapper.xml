@@ -8,7 +8,7 @@
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="crate_time" property="crateTime" jdbcType="TIMESTAMP" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
-    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="is_delete" property="isDelete" jdbcType="VARCHAR" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.ljfl.server.domain.po.GarbageTwoPOWithBLOBs" extends="BaseResultMap" >
     <result column="remark" property="remark" jdbcType="LONGVARCHAR" />
@@ -73,7 +73,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, city_code, garbage_one_id, name, crate_time, update_time, status
+    id, city_code, garbage_one_id, name, crate_time, update_time, is_delete
   </sql>
   <sql id="Blob_Column_List" >
     remark, note
@@ -129,11 +129,11 @@
   <insert id="insert" parameterType="com.ljfl.server.domain.po.GarbageTwoPOWithBLOBs" >
     insert into garbage_two (id, city_code, garbage_one_id, 
       name, crate_time, update_time, 
-      status, remark, note
+      is_delete, remark, note
       )
     values (#{id,jdbcType=VARCHAR}, #{cityCode,jdbcType=VARCHAR}, #{garbageOneId,jdbcType=VARCHAR}, 
       #{name,jdbcType=VARCHAR}, #{crateTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
-      #{status,jdbcType=VARCHAR}, #{remark,jdbcType=LONGVARCHAR}, #{note,jdbcType=LONGVARCHAR}
+      #{isDelete,jdbcType=VARCHAR}, #{remark,jdbcType=LONGVARCHAR}, #{note,jdbcType=LONGVARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.ljfl.server.domain.po.GarbageTwoPOWithBLOBs" >
@@ -157,8 +157,8 @@
       <if test="updateTime != null" >
         update_time,
       </if>
-      <if test="status != null" >
-        status,
+      <if test="isDelete != null" >
+        is_delete,
       </if>
       <if test="remark != null" >
         remark,
@@ -186,8 +186,8 @@
       <if test="updateTime != null" >
         #{updateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="status != null" >
-        #{status,jdbcType=VARCHAR},
+      <if test="isDelete != null" >
+        #{isDelete,jdbcType=VARCHAR},
       </if>
       <if test="remark != null" >
         #{remark,jdbcType=LONGVARCHAR},
@@ -224,8 +224,8 @@
       <if test="record.updateTime != null" >
         update_time = #{record.updateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.status != null" >
-        status = #{record.status,jdbcType=VARCHAR},
+      <if test="record.isDelete != null" >
+        is_delete = #{record.isDelete,jdbcType=VARCHAR},
       </if>
       <if test="record.remark != null" >
         remark = #{record.remark,jdbcType=LONGVARCHAR},
@@ -246,7 +246,7 @@
       name = #{record.name,jdbcType=VARCHAR},
       crate_time = #{record.crateTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP},
-      status = #{record.status,jdbcType=VARCHAR},
+      is_delete = #{record.isDelete,jdbcType=VARCHAR},
       remark = #{record.remark,jdbcType=LONGVARCHAR},
       note = #{record.note,jdbcType=LONGVARCHAR}
     <if test="_parameter != null" >
@@ -261,7 +261,7 @@
       name = #{record.name,jdbcType=VARCHAR},
       crate_time = #{record.crateTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP},
-      status = #{record.status,jdbcType=VARCHAR}
+      is_delete = #{record.isDelete,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -284,8 +284,8 @@
       <if test="updateTime != null" >
         update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="status != null" >
-        status = #{status,jdbcType=VARCHAR},
+      <if test="isDelete != null" >
+        is_delete = #{isDelete,jdbcType=VARCHAR},
       </if>
       <if test="remark != null" >
         remark = #{remark,jdbcType=LONGVARCHAR},
@@ -303,7 +303,7 @@
       name = #{name,jdbcType=VARCHAR},
       crate_time = #{crateTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
-      status = #{status,jdbcType=VARCHAR},
+      is_delete = #{isDelete,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=LONGVARCHAR},
       note = #{note,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=VARCHAR}
@@ -315,7 +315,7 @@
       name = #{name,jdbcType=VARCHAR},
       crate_time = #{crateTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
-      status = #{status,jdbcType=VARCHAR}
+      is_delete = #{isDelete,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>

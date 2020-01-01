@@ -28,7 +28,7 @@ public class UserPO implements Serializable {
 
     private Integer count;
 
-    private String status;
+    private String isDelete;
 
     private Date createTime;
 
@@ -136,12 +136,12 @@ public class UserPO implements Serializable {
         this.count = count;
     }
 
-    public String getStatus() {
-        return status;
+    public String getIsDelete() {
+        return isDelete;
     }
 
-    public void setStatus(String status) {
-        this.status = status == null ? null : status.trim();
+    public void setIsDelete(String isDelete) {
+        this.isDelete = isDelete == null ? null : isDelete.trim();
     }
 
     public Date getCreateTime() {

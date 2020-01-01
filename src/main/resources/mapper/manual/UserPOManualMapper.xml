@@ -30,6 +30,6 @@
     note
   </sql>
     <select id="countUser" resultType="java.lang.Long">
-        select count(*) from user  where openid = #{openid,jdbcType=VARCHAR}
+        select count(*) from user  where is_delete='0' and openid = #{openid,jdbcType=VARCHAR}
     </select>
 </mapper>

@@ -3,12 +3,12 @@ package com.ljfl.server.domain.po;
 import java.io.Serializable;
 import java.util.Date;
 
-public class UserGarbagePO implements Serializable {
+public class UserSignPO implements Serializable {
     private String id;
 
     private String userId;
 
-    private String garbageTwoId;
+    private String signType;
 
     private Date createTime;
 
@@ -36,12 +36,12 @@ public class UserGarbagePO implements Serializable {
         this.userId = userId == null ? null : userId.trim();
     }
 
-    public String getGarbageTwoId() {
-        return garbageTwoId;
+    public String getSignType() {
+        return signType;
     }
 
-    public void setGarbageTwoId(String garbageTwoId) {
-        this.garbageTwoId = garbageTwoId == null ? null : garbageTwoId.trim();
+    public void setSignType(String signType) {
+        this.signType = signType == null ? null : signType.trim();
     }
 
     public Date getCreateTime() {

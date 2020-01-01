@@ -1,15 +1,16 @@
 package com.ljfl.server.service.impl;
 
+import com.ljfl.server.common.utils.UUIDUtil;
 import com.ljfl.server.converters.UserConverter;
 import com.ljfl.server.dao.mapper.UserPOMapper;
 import com.ljfl.server.dao.mapper.manual.UserPOManualMapper;
 import com.ljfl.server.domain.po.UserPO;
 import com.ljfl.server.dto.UserDTO;
 import com.ljfl.server.service.UserService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.UUID;
 
 /**
  * @Description: java类作用描述
@@ -27,8 +28,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public void addUser(UserDTO dto) {
         UserPO po = UserConverter.dtoToPO(dto);
-        if (po.getId() == null) po.setId(UUID.randomUUID().toString().substring(0, 20));
+        if (po.getId() == null) po.setId(UUIDUtil.getUUID());
         userPOMapper.insertSelective(po);
+    }
+
+    @Override
+    public void updateUser(UserDTO dto) {
+        if (StringUtils.isBlank(dto.getId())) addUser(dto);
+        UserPO po = UserConverter.dtoToPO(dto);
+        userPOMapper.updateByPrimaryKeySelective(po);
     }
 
     @Override

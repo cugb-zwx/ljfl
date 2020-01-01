@@ -10,7 +10,7 @@
     <result column="state" property="state" jdbcType="BIT" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
-    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="is_delete" property="isDelete" jdbcType="VARCHAR" />
     <result column="note" property="note" jdbcType="VARCHAR" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.ljfl.server.domain.po.ProvincePOWithBLOBs" extends="BaseResultMap" >
@@ -76,7 +76,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, code, name, py, type, state, create_time, update_time, status, note
+    id, code, name, py, type, state, create_time, update_time, is_delete, note
   </sql>
   <sql id="Blob_Column_List" >
     reg, puh
@@ -132,11 +132,11 @@
   <insert id="insert" parameterType="com.ljfl.server.domain.po.ProvincePOWithBLOBs" >
     insert into province (id, code, name, 
       py, type, state, create_time, 
-      update_time, status, note, 
+      update_time, is_delete, note, 
       reg, puh)
     values (#{id,jdbcType=INTEGER}, #{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
       #{py,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{state,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updateTime,jdbcType=TIMESTAMP}, #{status,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{isDelete,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}, 
       #{reg,jdbcType=LONGVARCHAR}, #{puh,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.ljfl.server.domain.po.ProvincePOWithBLOBs" >
@@ -166,8 +166,8 @@
       <if test="updateTime != null" >
         update_time,
       </if>
-      <if test="status != null" >
-        status,
+      <if test="isDelete != null" >
+        is_delete,
       </if>
       <if test="note != null" >
         note,
@@ -204,8 +204,8 @@
       <if test="updateTime != null" >
         #{updateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="status != null" >
-        #{status,jdbcType=VARCHAR},
+      <if test="isDelete != null" >
+        #{isDelete,jdbcType=VARCHAR},
       </if>
       <if test="note != null" >
         #{note,jdbcType=VARCHAR},
@@ -251,8 +251,8 @@
       <if test="record.updateTime != null" >
         update_time = #{record.updateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.status != null" >
-        status = #{record.status,jdbcType=VARCHAR},
+      <if test="record.isDelete != null" >
+        is_delete = #{record.isDelete,jdbcType=VARCHAR},
       </if>
       <if test="record.note != null" >
         note = #{record.note,jdbcType=VARCHAR},
@@ -278,7 +278,7 @@
       state = #{record.state,jdbcType=BIT},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP},
-      status = #{record.status,jdbcType=VARCHAR},
+      is_delete = #{record.isDelete,jdbcType=VARCHAR},
       note = #{record.note,jdbcType=VARCHAR},
       reg = #{record.reg,jdbcType=LONGVARCHAR},
       puh = #{record.puh,jdbcType=LONGVARCHAR}
@@ -296,7 +296,7 @@
       state = #{record.state,jdbcType=BIT},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP},
-      status = #{record.status,jdbcType=VARCHAR},
+      is_delete = #{record.isDelete,jdbcType=VARCHAR},
       note = #{record.note,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -326,8 +326,8 @@
       <if test="updateTime != null" >
         update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="status != null" >
-        status = #{status,jdbcType=VARCHAR},
+      <if test="isDelete != null" >
+        is_delete = #{isDelete,jdbcType=VARCHAR},
       </if>
       <if test="note != null" >
         note = #{note,jdbcType=VARCHAR},
@@ -350,7 +350,7 @@
       state = #{state,jdbcType=BIT},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
-      status = #{status,jdbcType=VARCHAR},
+      is_delete = #{isDelete,jdbcType=VARCHAR},
       note = #{note,jdbcType=VARCHAR},
       reg = #{reg,jdbcType=LONGVARCHAR},
       puh = #{puh,jdbcType=LONGVARCHAR}
@@ -365,7 +365,7 @@
       state = #{state,jdbcType=BIT},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
-      status = #{status,jdbcType=VARCHAR},
+      is_delete = #{isDelete,jdbcType=VARCHAR},
       note = #{note,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>

@@ -20,7 +20,7 @@ public class ProvincePO implements Serializable {
 
     private Date updateTime;
 
-    private String status;
+    private String isDelete;
 
     private String note;
 
@@ -90,12 +90,12 @@ public class ProvincePO implements Serializable {
         this.updateTime = updateTime;
     }
 
-    public String getStatus() {
-        return status;
+    public String getIsDelete() {
+        return isDelete;
     }
 
-    public void setStatus(String status) {
-        this.status = status == null ? null : status.trim();
+    public void setIsDelete(String isDelete) {
+        this.isDelete = isDelete == null ? null : isDelete.trim();
     }
 
     public String getNote() {

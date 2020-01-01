@@ -10,6 +10,8 @@ import com.ljfl.server.dto.UserDTO;
 public interface UserService {
     void addUser(UserDTO dto);
 
+    void updateUser(UserDTO dto);
+
     UserDTO getUser(UserDTO dto);
 
     boolean isHasUser(UserDTO dto);

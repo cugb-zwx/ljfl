@@ -33,7 +33,7 @@ public class UserDTO {
 
     private Integer count;
 
-    private String status;
+    private String isDelete;
 
     private Long createTime;
 
@@ -147,12 +147,12 @@ public class UserDTO {
         this.count = count;
     }
 
-    public String getStatus() {
-        return status;
+    public String getIsDelete() {
+        return isDelete;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setIsDelete(String status) {
+        this.isDelete = status;
     }
 
     public Long getCreateTime() {

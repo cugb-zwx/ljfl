@@ -31,7 +31,7 @@ public class AddUserReq extends BaseVO {
     @ApiModelProperty("用户手机号")
     private String mobile;
     @ApiModelProperty("用户状态")
-    private String status;
+    private String isDelete;
     @ApiModelProperty("用户备注")
     private String note;
 
@@ -115,12 +115,12 @@ public class AddUserReq extends BaseVO {
         this.mobile = mobile;
     }
 
-    public String getStatus() {
-        return status;
+    public String getIsDelete() {
+        return isDelete;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setIsDelete(String status) {
+        this.isDelete = status;
     }
 
     public String getNote() {

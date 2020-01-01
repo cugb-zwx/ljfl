@@ -34,7 +34,7 @@ public class UserRes extends BaseVO {
     @ApiModelProperty("操作次数")
     private Integer count;
     @ApiModelProperty("用户状态")
-    private String status;
+    private String isDelete;
     @ApiModelProperty("创建时间")
     private Long createTime;
     @ApiModelProperty("更新时间")
@@ -132,12 +132,12 @@ public class UserRes extends BaseVO {
         this.count = count;
     }
 
-    public String getStatus() {
-        return status;
+    public String getIsDelete() {
+        return isDelete;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setIsDelete(String status) {
+        this.isDelete = status;
     }
 
     public Long getCreateTime() {

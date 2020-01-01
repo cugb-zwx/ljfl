@@ -29,7 +29,7 @@ public class UserConverter {
         userDTO.setAge(req.getAge());
         userDTO.setCityCode(req.getCityCode());
         userDTO.setMobile(req.getMobile());
-        userDTO.setStatus(req.getStatus());
+        userDTO.setIsDelete(req.getIsDelete());
         userDTO.setNote(req.getNote());
         return userDTO;
     }
@@ -69,7 +69,7 @@ public class UserConverter {
         userPO.setCityCode(dto.getCityCode());
         userPO.setMobile(dto.getMobile());
         userPO.setCount(dto.getCount());
-        userPO.setStatus(dto.getStatus());
+        userPO.setIsDelete(dto.getIsDelete());
         userPO.setCreateTime(DateUtil.longToDate(dto.getCreateTime()));
         userPO.setUpdateTime(DateUtil.longToDate(dto.getUpdateTime()));
         userPO.setPoints(dto.getPoints());
@@ -94,7 +94,7 @@ public class UserConverter {
         userDTO.setCityCode(po.getCityCode());
         userDTO.setMobile(po.getMobile());
         userDTO.setCount(po.getCount());
-        userDTO.setStatus(po.getStatus());
+        userDTO.setIsDelete(po.getIsDelete());
         userDTO.setCreateTime(DateUtil.dateToLong(po.getCreateTime()));
         userDTO.setUpdateTime(DateUtil.dateToLong(po.getUpdateTime()));
         userDTO.setPoints(po.getPoints());
@@ -118,7 +118,7 @@ public class UserConverter {
         userRes.setCityCode(dto.getCityCode());
         userRes.setMobile(dto.getMobile());
         userRes.setCount(dto.getCount());
-        userRes.setStatus(dto.getStatus());
+        userRes.setIsDelete(dto.getIsDelete());
         userRes.setCreateTime(dto.getCreateTime());
         userRes.setUpdateTime(dto.getUpdateTime());
         userRes.setPoints(dto.getPoints());

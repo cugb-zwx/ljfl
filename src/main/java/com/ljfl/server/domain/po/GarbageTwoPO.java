@@ -16,7 +16,7 @@ public class GarbageTwoPO implements Serializable {
 
     private Date updateTime;
 
-    private String status;
+    private String isDelete;
 
     private static final long serialVersionUID = 1L;
 
@@ -68,11 +68,11 @@ public class GarbageTwoPO implements Serializable {
         this.updateTime = updateTime;
     }
 
-    public String getStatus() {
-        return status;
+    public String getIsDelete() {
+        return isDelete;
     }
 
-    public void setStatus(String status) {
-        this.status = status == null ? null : status.trim();
+    public void setIsDelete(String isDelete) {
+        this.isDelete = isDelete == null ? null : isDelete.trim();
     }
 }
