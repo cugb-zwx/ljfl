@@ -13,6 +13,8 @@ public interface UserSignService {
 
     long countSignUser(UserSignDTO dto);
 
+    int countContinueSign(UserSignDTO dto);
+
     void sign(UserSignDTO dto);
 
     List<UserSignDTO> listUserSign(UserSignDTO dto);

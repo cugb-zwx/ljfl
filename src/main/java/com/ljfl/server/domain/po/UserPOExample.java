@@ -2,6 +2,7 @@ package com.ljfl.server.domain.po;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 public class UserPOExample {
@@ -103,6 +104,32 @@ public class UserPOExample {
                 throw new RuntimeException("Between values for " + property + " cannot be null");
             }
             criteria.add(new Criterion(condition, value1, value2));
+        }
+
+        protected void addCriterionForJDBCDate(String condition, Date value, String property) {
+            if (value == null) {
+                throw new RuntimeException("Value for " + property + " cannot be null");
+            }
+            addCriterion(condition, new java.sql.Date(value.getTime()), property);
+        }
+
+        protected void addCriterionForJDBCDate(String condition, List<Date> values, String property) {
+            if (values == null || values.size() == 0) {
+                throw new RuntimeException("Value list for " + property + " cannot be null or empty");
+            }
+            List<java.sql.Date> dateList = new ArrayList<java.sql.Date>();
+            Iterator<Date> iter = values.iterator();
+            while (iter.hasNext()) {
+                dateList.add(new java.sql.Date(iter.next().getTime()));
+            }
+            addCriterion(condition, dateList, property);
+        }
+
+        protected void addCriterionForJDBCDate(String condition, Date value1, Date value2, String property) {
+            if (value1 == null || value2 == null) {
+                throw new RuntimeException("Between values for " + property + " cannot be null");
+            }
+            addCriterion(condition, new java.sql.Date(value1.getTime()), new java.sql.Date(value2.getTime()), property);
         }
 
         public Criteria andIdIsNull() {
@@ -905,73 +932,183 @@ public class UserPOExample {
             return (Criteria) this;
         }
 
-        public Criteria andIsDeleteIsNull() {
-            addCriterion("is_delete is null");
+        public Criteria andPointsIsNull() {
+            addCriterion("points is null");
             return (Criteria) this;
         }
 
-        public Criteria andIsDeleteIsNotNull() {
-            addCriterion("is_delete is not null");
+        public Criteria andPointsIsNotNull() {
+            addCriterion("points is not null");
             return (Criteria) this;
         }
 
-        public Criteria andIsDeleteEqualTo(String value) {
-            addCriterion("is_delete =", value, "isDelete");
+        public Criteria andPointsEqualTo(Long value) {
+            addCriterion("points =", value, "points");
             return (Criteria) this;
         }
 
-        public Criteria andIsDeleteNotEqualTo(String value) {
-            addCriterion("is_delete <>", value, "isDelete");
+        public Criteria andPointsNotEqualTo(Long value) {
+            addCriterion("points <>", value, "points");
             return (Criteria) this;
         }
 
-        public Criteria andIsDeleteGreaterThan(String value) {
-            addCriterion("is_delete >", value, "isDelete");
+        public Criteria andPointsGreaterThan(Long value) {
+            addCriterion("points >", value, "points");
             return (Criteria) this;
         }
 
-        public Criteria andIsDeleteGreaterThanOrEqualTo(String value) {
-            addCriterion("is_delete >=", value, "isDelete");
+        public Criteria andPointsGreaterThanOrEqualTo(Long value) {
+            addCriterion("points >=", value, "points");
             return (Criteria) this;
         }
 
-        public Criteria andIsDeleteLessThan(String value) {
-            addCriterion("is_delete <", value, "isDelete");
+        public Criteria andPointsLessThan(Long value) {
+            addCriterion("points <", value, "points");
             return (Criteria) this;
         }
 
-        public Criteria andIsDeleteLessThanOrEqualTo(String value) {
-            addCriterion("is_delete <=", value, "isDelete");
+        public Criteria andPointsLessThanOrEqualTo(Long value) {
+            addCriterion("points <=", value, "points");
             return (Criteria) this;
         }
 
-        public Criteria andIsDeleteLike(String value) {
-            addCriterion("is_delete like", value, "isDelete");
+        public Criteria andPointsIn(List<Long> values) {
+            addCriterion("points in", values, "points");
             return (Criteria) this;
         }
 
-        public Criteria andIsDeleteNotLike(String value) {
-            addCriterion("is_delete not like", value, "isDelete");
+        public Criteria andPointsNotIn(List<Long> values) {
+            addCriterion("points not in", values, "points");
             return (Criteria) this;
         }
 
-        public Criteria andIsDeleteIn(List<String> values) {
-            addCriterion("is_delete in", values, "isDelete");
+        public Criteria andPointsBetween(Long value1, Long value2) {
+            addCriterion("points between", value1, value2, "points");
             return (Criteria) this;
         }
 
-        public Criteria andIsDeleteNotIn(List<String> values) {
-            addCriterion("is_delete not in", values, "isDelete");
+        public Criteria andPointsNotBetween(Long value1, Long value2) {
+            addCriterion("points not between", value1, value2, "points");
             return (Criteria) this;
         }
 
-        public Criteria andIsDeleteBetween(String value1, String value2) {
-            addCriterion("is_delete between", value1, value2, "isDelete");
+        public Criteria andLastSignDateIsNull() {
+            addCriterion("last_sign_date is null");
             return (Criteria) this;
         }
 
-        public Criteria andIsDeleteNotBetween(String value1, String value2) {
-            addCriterion("is_delete not between", value1, value2, "isDelete");
+        public Criteria andLastSignDateIsNotNull() {
+            addCriterion("last_sign_date is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastSignDateEqualTo(Date value) {
+            addCriterionForJDBCDate("last_sign_date =", value, "lastSignDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastSignDateNotEqualTo(Date value) {
+            addCriterionForJDBCDate("last_sign_date <>", value, "lastSignDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastSignDateGreaterThan(Date value) {
+            addCriterionForJDBCDate("last_sign_date >", value, "lastSignDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastSignDateGreaterThanOrEqualTo(Date value) {
+            addCriterionForJDBCDate("last_sign_date >=", value, "lastSignDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastSignDateLessThan(Date value) {
+            addCriterionForJDBCDate("last_sign_date <", value, "lastSignDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastSignDateLessThanOrEqualTo(Date value) {
+            addCriterionForJDBCDate("last_sign_date <=", value, "lastSignDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastSignDateIn(List<Date> values) {
+            addCriterionForJDBCDate("last_sign_date in", values, "lastSignDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastSignDateNotIn(List<Date> values) {
+            addCriterionForJDBCDate("last_sign_date not in", values, "lastSignDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastSignDateBetween(Date value1, Date value2) {
+            addCriterionForJDBCDate("last_sign_date between", value1, value2, "lastSignDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastSignDateNotBetween(Date value1, Date value2) {
+            addCriterionForJDBCDate("last_sign_date not between", value1, value2, "lastSignDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastSignCountIsNull() {
+            addCriterion("last_sign_count is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastSignCountIsNotNull() {
+            addCriterion("last_sign_count is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastSignCountEqualTo(Integer value) {
+            addCriterion("last_sign_count =", value, "lastSignCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastSignCountNotEqualTo(Integer value) {
+            addCriterion("last_sign_count <>", value, "lastSignCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastSignCountGreaterThan(Integer value) {
+            addCriterion("last_sign_count >", value, "lastSignCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastSignCountGreaterThanOrEqualTo(Integer value) {
+            addCriterion("last_sign_count >=", value, "lastSignCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastSignCountLessThan(Integer value) {
+            addCriterion("last_sign_count <", value, "lastSignCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastSignCountLessThanOrEqualTo(Integer value) {
+            addCriterion("last_sign_count <=", value, "lastSignCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastSignCountIn(List<Integer> values) {
+            addCriterion("last_sign_count in", values, "lastSignCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastSignCountNotIn(List<Integer> values) {
+            addCriterion("last_sign_count not in", values, "lastSignCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastSignCountBetween(Integer value1, Integer value2) {
+            addCriterion("last_sign_count between", value1, value2, "lastSignCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastSignCountNotBetween(Integer value1, Integer value2) {
+            addCriterion("last_sign_count not between", value1, value2, "lastSignCount");
             return (Criteria) this;
         }
 
@@ -1095,63 +1232,73 @@ public class UserPOExample {
             return (Criteria) this;
         }
 
-        public Criteria andPointsIsNull() {
-            addCriterion("points is null");
+        public Criteria andIsDeleteIsNull() {
+            addCriterion("is_delete is null");
             return (Criteria) this;
         }
 
-        public Criteria andPointsIsNotNull() {
-            addCriterion("points is not null");
+        public Criteria andIsDeleteIsNotNull() {
+            addCriterion("is_delete is not null");
             return (Criteria) this;
         }
 
-        public Criteria andPointsEqualTo(Long value) {
-            addCriterion("points =", value, "points");
+        public Criteria andIsDeleteEqualTo(String value) {
+            addCriterion("is_delete =", value, "isDelete");
             return (Criteria) this;
         }
 
-        public Criteria andPointsNotEqualTo(Long value) {
-            addCriterion("points <>", value, "points");
+        public Criteria andIsDeleteNotEqualTo(String value) {
+            addCriterion("is_delete <>", value, "isDelete");
             return (Criteria) this;
         }
 
-        public Criteria andPointsGreaterThan(Long value) {
-            addCriterion("points >", value, "points");
+        public Criteria andIsDeleteGreaterThan(String value) {
+            addCriterion("is_delete >", value, "isDelete");
             return (Criteria) this;
         }
 
-        public Criteria andPointsGreaterThanOrEqualTo(Long value) {
-            addCriterion("points >=", value, "points");
+        public Criteria andIsDeleteGreaterThanOrEqualTo(String value) {
+            addCriterion("is_delete >=", value, "isDelete");
             return (Criteria) this;
         }
 
-        public Criteria andPointsLessThan(Long value) {
-            addCriterion("points <", value, "points");
+        public Criteria andIsDeleteLessThan(String value) {
+            addCriterion("is_delete <", value, "isDelete");
             return (Criteria) this;
         }
 
-        public Criteria andPointsLessThanOrEqualTo(Long value) {
-            addCriterion("points <=", value, "points");
+        public Criteria andIsDeleteLessThanOrEqualTo(String value) {
+            addCriterion("is_delete <=", value, "isDelete");
             return (Criteria) this;
         }
 
-        public Criteria andPointsIn(List<Long> values) {
-            addCriterion("points in", values, "points");
+        public Criteria andIsDeleteLike(String value) {
+            addCriterion("is_delete like", value, "isDelete");
             return (Criteria) this;
         }
 
-        public Criteria andPointsNotIn(List<Long> values) {
-            addCriterion("points not in", values, "points");
+        public Criteria andIsDeleteNotLike(String value) {
+            addCriterion("is_delete not like", value, "isDelete");
             return (Criteria) this;
         }
 
-        public Criteria andPointsBetween(Long value1, Long value2) {
-            addCriterion("points between", value1, value2, "points");
+        public Criteria andIsDeleteIn(List<String> values) {
+            addCriterion("is_delete in", values, "isDelete");
             return (Criteria) this;
         }
 
-        public Criteria andPointsNotBetween(Long value1, Long value2) {
-            addCriterion("points not between", value1, value2, "points");
+        public Criteria andIsDeleteNotIn(List<String> values) {
+            addCriterion("is_delete not in", values, "isDelete");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeleteBetween(String value1, String value2) {
+            addCriterion("is_delete between", value1, value2, "isDelete");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeleteNotBetween(String value1, String value2) {
+            addCriterion("is_delete not between", value1, value2, "isDelete");
             return (Criteria) this;
         }
     }

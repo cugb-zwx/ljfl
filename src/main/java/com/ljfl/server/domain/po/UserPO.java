@@ -28,13 +28,17 @@ public class UserPO implements Serializable {
 
     private Integer count;
 
-    private String isDelete;
+    private Long points;
+
+    private Date lastSignDate;
+
+    private Integer lastSignCount;
 
     private Date createTime;
 
     private Date updateTime;
 
-    private Long points;
+    private String isDelete;
 
     private String note;
 
@@ -136,12 +140,28 @@ public class UserPO implements Serializable {
         this.count = count;
     }
 
-    public String getIsDelete() {
-        return isDelete;
+    public Long getPoints() {
+        return points;
     }
 
-    public void setIsDelete(String isDelete) {
-        this.isDelete = isDelete == null ? null : isDelete.trim();
+    public void setPoints(Long points) {
+        this.points = points;
+    }
+
+    public Date getLastSignDate() {
+        return lastSignDate;
+    }
+
+    public void setLastSignDate(Date lastSignDate) {
+        this.lastSignDate = lastSignDate;
+    }
+
+    public Integer getLastSignCount() {
+        return lastSignCount;
+    }
+
+    public void setLastSignCount(Integer lastSignCount) {
+        this.lastSignCount = lastSignCount;
     }
 
     public Date getCreateTime() {
@@ -160,12 +180,12 @@ public class UserPO implements Serializable {
         this.updateTime = updateTime;
     }
 
-    public Long getPoints() {
-        return points;
+    public String getIsDelete() {
+        return isDelete;
     }
 
-    public void setPoints(Long points) {
-        this.points = points;
+    public void setIsDelete(String isDelete) {
+        this.isDelete = isDelete == null ? null : isDelete.trim();
     }
 
     public String getNote() {

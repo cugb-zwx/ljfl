@@ -46,8 +46,9 @@ public class UserSignBiz {
         userDTO.setId(dto.getUserId());
         UserDTO user = userService.getUser(userDTO);
         Long points = user.getPoints();
-        if (points == null) points = 5L;
-        else points += 5;
+        int lastSignCount = userSignService.countContinueSign(dto);
+        if (points == null) points = 0L;
+        points += ++lastSignCount;
         user.setPoints(points);
         userService.updateUser(user);
     }

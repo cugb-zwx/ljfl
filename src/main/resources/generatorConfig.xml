@@ -54,11 +54,11 @@
         </javaClientGenerator>
 
         <table tableName="user" domainObjectName="UserPO"/>
-        <table tableName="city" domainObjectName="CityPO"/>
-        <table tableName="province" domainObjectName="ProvincePO"/>
-        <table tableName="user_garbage" domainObjectName="UserGarbagePO"/>
-        <table tableName="garbage_one" domainObjectName="GarbageOnePO"/>
-        <table tableName="garbage_two" domainObjectName="GarbageTwoPO"/>
-        <table tableName="user_sign" domainObjectName="UserSignPO"/>
+        <!--<table tableName="city" domainObjectName="CityPO"/>-->
+        <!--<table tableName="province" domainObjectName="ProvincePO"/>-->
+        <!--<table tableName="user_garbage" domainObjectName="UserGarbagePO"/>-->
+        <!--<table tableName="garbage_one" domainObjectName="GarbageOnePO"/>-->
+        <!--<table tableName="garbage_two" domainObjectName="GarbageTwoPO"/>-->
+        <!--<table tableName="user_sign" domainObjectName="UserSignPO"/>-->
     </context>
 </generatorConfiguration>

@@ -110,6 +110,8 @@ CREATE TABLE `user` (
   `mobile` varchar(11)  DEFAULT '' COMMENT '手机号',
   `count` int(20) NOT NULL DEFAULT '0' COMMENT '操作次数',
   `points` bigint(20) NOT NULL DEFAULT '0',
+  `last_sign_date` date COMMENT '上次签到时间',
+  `last_sign_count` int(20) COMMENT '累计签到次数',
   --   通用字段
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',

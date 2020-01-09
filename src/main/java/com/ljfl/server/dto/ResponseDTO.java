@@ -1,7 +1,6 @@
 package com.ljfl.server.dto;
 
 import com.alibaba.fastjson.JSONObject;
-import com.ljfl.server.common.enums.CommonCodeEnum;
 
 /**
  * @Description: java类作用描述
@@ -18,24 +17,12 @@ public class ResponseDTO {
     }
 
     public boolean isSuccess() {
-        return success != null && success;
+        return getSuccess() != null && getSuccess();
     }
 
     private JSONObject getResult() {
         if (isSuccess()) return data;
         return error;
-    }
-
-    public String getMessage() {
-        JSONObject result = getResult();
-        if (result != null) return result.getString("message");
-        return CommonCodeEnum.INTERNAL_ERROR.getMessage();
-    }
-
-    public Integer getCode() {
-        JSONObject result = getResult();
-        if (result != null) return result.getInteger("code");
-        return CommonCodeEnum.INTERNAL_ERROR.getCode();
     }
 
     public JSONObject getError() {
