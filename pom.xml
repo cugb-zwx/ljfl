@@ -76,6 +76,12 @@
             <version>2.0.4.RELEASE</version>
         </dependency>
 
+        <!--<dependency>-->
+            <!--<groupId>com.spring4all</groupId>-->
+            <!--<artifactId>swagger-spring-boot-starter</artifactId>-->
+            <!--<version>1.7.0.RELEASE</version>-->
+        <!--</dependency>-->
+
         <!--swagger2依赖-->
         <dependency>
             <groupId>io.springfox</groupId>
