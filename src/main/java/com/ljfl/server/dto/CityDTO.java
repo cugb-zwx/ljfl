@@ -1,9 +1,14 @@
-package com.ljfl.server.domain.po;
+package com.ljfl.server.dto;
 
-import java.io.Serializable;
 import java.util.Date;
 
-public class CityPO implements Serializable {
+/**
+ * Created by sec on 2020-1-6.
+ */
+public class CityDTO {
+
+    private static final long serialVersionUID = 1L;
+
     private String id;
 
     private String code;
@@ -16,15 +21,14 @@ public class CityPO implements Serializable {
 
     private Boolean state;
 
-    private Date createTime;
+    private Long createTime;
 
-    private Date updateTime;
+    private Long updateTime;
 
     private String isDelete;
 
     private String note;
 
-    private static final long serialVersionUID = 1L;
 
     public String getId() {
         return id;
@@ -62,7 +66,9 @@ public class CityPO implements Serializable {
         return provinceCode;
     }
 
-    public void setProvinceCode(String provinceCode) {this.provinceCode = provinceCode == null ? null : provinceCode.trim();}
+    public void setProvinceCode(String provinceCode) {
+        this.provinceCode = provinceCode == null ? null : provinceCode.trim();
+    }
 
     public Boolean getState() {
         return state;
@@ -72,19 +78,19 @@ public class CityPO implements Serializable {
         this.state = state;
     }
 
-    public Date getCreateTime() {
+    public Long getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(Long createTime) {
         this.createTime = createTime;
     }
 
-    public Date getUpdateTime() {
+    public Long getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(Date updateTime) {
+    public void setUpdateTime(Long updateTime) {
         this.updateTime = updateTime;
     }
 

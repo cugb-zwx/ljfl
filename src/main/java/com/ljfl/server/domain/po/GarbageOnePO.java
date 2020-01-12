@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class GarbageOnePO implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private String id;
 
     private String cityCode;
@@ -16,7 +18,6 @@ public class GarbageOnePO implements Serializable {
 
     private String isDelete;
 
-    private static final long serialVersionUID = 1L;
 
     public String getId() {
         return id;
