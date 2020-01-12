@@ -17,9 +17,9 @@ start(){
     echo "$APP_NAME start..."
     cd $APP_DIR
     if [ "$ENV" = "online" ]; then
-        java -jar $JVM_OPTS $APP_DIR/$APP_NAME.jar --spring.profiles.active=$ENV
+       nohup java -jar $JVM_OPTS $APP_DIR/$APP_NAME.jar --spring.profiles.active=$ENV > ./$ENV.log 2>&1 &
     else
-        java -jar $APP_DIR/$APP_NAME.jar --spring.profiles.active=$ENV
+       nohup java -jar $APP_DIR/$APP_NAME.jar --spring.profiles.active=$ENV > ./$ENV.log 2>&1 &
     fi
     echo Start Success!
   else
