@@ -16,7 +16,7 @@
 
         <!-- 数据库链接URL、用户名、密码 -->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://121.36.50.36:3306/ljfl-offline?useUnicode=true&amp;characterEncoding=UTF8&amp;connectTimeout=1000&amp;socketTimeout=10000"
+                        connectionURL="jdbc:mysql://121.36.50.36:3306/ljfl-dev?useUnicode=true&amp;characterEncoding=UTF8&amp;connectTimeout=1000&amp;socketTimeout=10000"
                         userId="root"
                         password="Yuyuehua123!@%">
         </jdbcConnection>
@@ -53,6 +53,12 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
-        <table tableName="customer_order" domainObjectName="CustomerOrderPO"/>
+        <table tableName="user" domainObjectName="UserPO"/>
+        <table tableName="city" domainObjectName="CityPO"/>
+        <table tableName="province" domainObjectName="ProvincePO"/>
+        <table tableName="user_garbage" domainObjectName="UserGarbagePO"/>
+        <table tableName="garbage_one" domainObjectName="GarbageOnePO"/>
+        <table tableName="garbage_two" domainObjectName="GarbageTwoPO"/>
+        <table tableName="user_sign" domainObjectName="UserSignPO"/>
     </context>
 </generatorConfiguration>

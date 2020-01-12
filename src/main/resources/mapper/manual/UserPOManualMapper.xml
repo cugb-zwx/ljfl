@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ljfl.server.dao.mapper.manual.UserPOManualMapper">
+    <resultMap id="BaseResultMap" type="com.ljfl.server.domain.po.UserPO">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="nick_name" property="nickName" jdbcType="VARCHAR"/>
+        <result column="head_img" property="headImg" jdbcType="VARCHAR"/>
+        <result column="passward" property="passward" jdbcType="VARCHAR"/>
+        <result column="openid" property="openid" jdbcType="VARCHAR"/>
+        <result column="sex" property="sex" jdbcType="BIT"/>
+        <result column="age" property="age" jdbcType="TINYINT"/>
+        <result column="login_time" property="loginTime" jdbcType="TIMESTAMP"/>
+        <result column="city_code" property="cityCode" jdbcType="VARCHAR"/>
+        <result column="mobile" property="mobile" jdbcType="VARCHAR"/>
+        <result column="count" property="count" jdbcType="CHAR"/>
+        <result column="status" property="status" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="points" property="points" jdbcType="BIGINT"/>
+    </resultMap>
+    <resultMap id="ResultMapWithBLOBs" type="com.ljfl.server.domain.po.UserPO" extends="BaseResultMap">
+        <result column="note" property="note" jdbcType="LONGVARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, name, nick_name, head_img, passward, openid, sex, age, login_time, city_code,
+    mobile, count, status, create_time, update_time, points
+  </sql>
+    <sql id="Blob_Column_List">
+    note
+  </sql>
+    <select id="countUser" resultType="java.lang.Long">
+        select count(*) from user  where is_delete='0' and openid = #{openid,jdbcType=VARCHAR}
+    </select>
+</mapper>
