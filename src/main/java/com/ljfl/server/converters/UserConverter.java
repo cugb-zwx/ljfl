@@ -63,7 +63,7 @@ public class UserConverter {
         userPO.setHeadImg(dto.getHeadImg());
         userPO.setPassward(dto.getPassward());
         userPO.setOpenid(dto.getOpenid());
-        userPO.setSex(dto.getSex());
+        userPO.setSex(Byte.valueOf("0").equals(dto.getSex()) ? false : true);
         userPO.setAge(dto.getAge());
         userPO.setLoginTime(DateUtil.longToDate(dto.getLoginTime()));
         userPO.setCityCode(dto.getCityCode());
@@ -88,7 +88,7 @@ public class UserConverter {
         userDTO.setHeadImg(po.getHeadImg());
         userDTO.setPassward(po.getPassward());
         userDTO.setOpenid(po.getOpenid());
-        userDTO.setSex(po.getSex());
+        userDTO.setSex(Boolean.FALSE.equals(po.getSex()) ? Byte.valueOf("0") : Byte.valueOf("1"));
         userDTO.setAge(po.getAge());
         userDTO.setLoginTime(DateUtil.dateToLong(po.getLoginTime()));
         userDTO.setCityCode(po.getCityCode());
@@ -112,7 +112,7 @@ public class UserConverter {
         userRes.setNickName(dto.getNickName());
         userRes.setHeadImg(dto.getHeadImg());
         userRes.setOpenid(dto.getOpenid());
-        userRes.setSex(dto.getSex());
+        userRes.setSex(Byte.valueOf("0").equals(dto.getSex()) ? false : true);
         userRes.setAge(dto.getAge());
         userRes.setLoginTime(dto.getLoginTime());
         userRes.setCityCode(dto.getCityCode());

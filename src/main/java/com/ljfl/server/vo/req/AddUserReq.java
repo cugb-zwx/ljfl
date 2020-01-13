@@ -23,7 +23,7 @@ public class AddUserReq extends BaseVO {
     @ApiModelProperty("微信openid")
     private String openid;
     @ApiModelProperty("用户性别")
-    private Boolean sex;
+    private Byte sex;
     @ApiModelProperty("用户年龄")
     private Byte age;
     @ApiModelProperty("用户城市编码")
@@ -83,11 +83,11 @@ public class AddUserReq extends BaseVO {
         this.openid = openid;
     }
 
-    public Boolean getSex() {
+    public Byte getSex() {
         return sex;
     }
 
-    public void setSex(Boolean sex) {
+    public void setSex(Byte sex) {
         this.sex = sex;
     }
 

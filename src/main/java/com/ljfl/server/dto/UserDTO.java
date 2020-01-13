@@ -21,7 +21,7 @@ public class UserDTO {
 
     private String openid;
 
-    private Boolean sex;
+    private Byte sex;
 
     private Byte age;
 
@@ -99,11 +99,11 @@ public class UserDTO {
         this.openid = openid;
     }
 
-    public Boolean getSex() {
+    public Byte getSex() {
         return sex;
     }
 
-    public void setSex(Boolean sex) {
+    public void setSex(Byte sex) {
         this.sex = sex;
     }
 
