@@ -108,11 +108,6 @@
             <version>1.1.10</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
-        </dependency>
-
         <!--去掉html标签严格校验-->
         <dependency>
             <groupId>net.sourceforge.nekohtml</groupId>
@@ -143,10 +138,12 @@
             <artifactId>httpclient</artifactId>
             <version>4.4</version>
         </dependency>
-
-
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpmime</artifactId>
+            <version>4.4</version>
+        </dependency>
     </dependencies>
-
 
     <build>
         <plugins>
@@ -190,12 +187,7 @@
                     <skipTests>true</skipTests>
                 </configuration>
             </plugin>
-
-
-
         </plugins>
-
-
     </build>
 
 </project>

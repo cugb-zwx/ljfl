@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.ljfl.server.common.utils.HttpClientUtil;
-import com.ljfl.server.common.utils.HttpClientUtil2;
+import com.ljfl.server.common.utils.ParseUtil;
 import com.ljfl.server.common.utils.UUIDUtil;
 import com.ljfl.server.converters.GarbageQueryConverter;
 import com.ljfl.server.converters.GarbageTwoConverter;
@@ -16,8 +16,7 @@ import com.ljfl.server.dto.GarbageTwoDTO;
 import com.ljfl.server.dto.ResponseDTO;
 import com.ljfl.server.service.GarbageService;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.client.methods.HttpPost;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -32,10 +31,7 @@ import java.util.stream.Collectors;
  * Created by sec on 2020-1-7.
  */
 @Service
-
-
 public class GarbageServiceImpl implements GarbageService {
-
     @Autowired
     private GarbageTwoPOMapper garbageTwoPOMapper;
     @Value("${apiUrl}")
@@ -59,82 +55,29 @@ public class GarbageServiceImpl implements GarbageService {
     @Override
     public List<GarbageQueryDTO> picsearch(GarbageQueryDTO dto) {
 
-       // String apiUrl = "https://aiapi.jd.com/jdai/garbageImageSearch";
-       // String appkey="3189d4385ef1ddae1b7e7453a7cc56ba";
-       // String secretKey = "92be05b65eab00beb1e1c08be18c41c2";
+        String apiUrl = "https://aiapi.jd.com/jdai/garbageImageSearch";
+        String appkey="3189d4385ef1ddae1b7e7453a7cc56ba";
+        String secretKey = "92be05b65eab00beb1e1c08be18c41c2";
         long timestamp = System.currentTimeMillis();
         String sign = Hashing.md5().hashString(secretKey + timestamp, Charset.forName("UTF-8")).toString();
 
-        Map<String, String> params =new LinkedHashMap<>();
-        params.put("appkey",appKey);
-        params.put("timestamp",String.valueOf(timestamp));
-        params.put("sign",sign);
-        String url= getRqstUrl(apiUrl,params);
+        Map<String, String> params = new LinkedHashMap<>();
+        params.put("appkey", appkey);
+        params.put("timestamp", String.valueOf(timestamp));
+        params.put("sign", sign);
+        String url = getRqstUrl(apiUrl, params);
 
-        List<NameValuePair> pairs = new ArrayList<>();
-        NameValuePair pair1 = new BasicNameValuePair("imgBase64", String.valueOf(dto.getImgBase64()));
-        NameValuePair pair2 = new BasicNameValuePair("cityId", String.valueOf(dto.getCityCode()));
-        pairs.add(pair1);
-        pairs.add(pair2);
-        String ret = HttpClientUtil2.sendPost(url,pairs);
+        Map<String, String> bodyParams = new LinkedHashMap<>();
+        bodyParams.put("imgBased64", String.valueOf(dto.getImgBase64()));
+        bodyParams.put("cityCode", String.valueOf(dto.getId()));
 
-        //ResponseDTO rs = HttpClientUtil.sendPost(url, map);
-        /*Map<String, Object> map = new HashMap<String, Object>();
-        map.put("imgBase64", String.valueOf(dto.getImgBase64()));
-        map.put("cityId", String.valueOf(dto.getCityCode()));
-        String ret = HttpClientUtil2.sendPost(url, map);*/
-        ResponseDTO rs = new ResponseDTO();
-        List<GarbageQueryDTO> dms = new ArrayList<>();
-        List<GarbageTwoDTO> dts = new ArrayList<>();
-        if(rs.isSuccess()) {
-            JSONObject jsonObject = rs.getData();
-            String result = jsonObject.getString("result");
-            JSONObject jsonObjects = JSON.parseObject(result);
-            //String status = jsonObjects.getString("status");
-            JSONArray ja = jsonObjects.getJSONArray("garbage_info");
-            for (int i = 0; i < ja.size(); i++) {
-                GarbageTwoDTO dt= new GarbageTwoDTO();
-                GarbageQueryDTO dm= new GarbageQueryDTO();
-                dt.setCityCode(ja.getJSONObject(i).getString("cate_id"));
-                dt.setName(ja.getJSONObject(i).getString("garbage_name"));
-                dt.setReMark(ja.getJSONObject(i).getString("ps"));
-                dts.add(dt);
-                dm.setCityCode(ja.getJSONObject(i).getString("cate_id"));
-                dm.setName(ja.getJSONObject(i).getString("garbage_name"));
-                dm.setReMark(ja.getJSONObject(i).getString("ps"));
-                dms.add(dm);
-            }
-            for (GarbageTwoDTO dt : dts) {
-                //加判断
-                addGarbage(dt);
-            }
-        }
-        return dms ;
-    }
+        Map<String, String> headMap = new HashMap<>();
+        headMap.put("Content-Type", "application/json; charset=utf-8");
 
-    @Override
-    public List<GarbageQueryDTO> search(GarbageQueryDTO dto) {
+        HttpPost httpPost = ParseUtil.postMethod(url, bodyParams, headMap);
+        String resp = HttpClientUtil.httpPost(httpPost);
+        ResponseDTO rs = ParseUtil.parseResponseDTO(resp);
 
-         String apiUrl = "http://localhost:9090/http/garbage/Search";
-        // String appkey="3189d4385ef1ddae1b7e7453a7cc56ba";
-        // String secretKey = "92be05b65eab00beb1e1c08be18c41c2";
-
-
-        List<NameValuePair> pairs = new ArrayList<>();
-        NameValuePair pair1 = new BasicNameValuePair("imgBase64", String.valueOf(dto.getImgBase64()));
-        NameValuePair pair2 = new BasicNameValuePair("cityId", String.valueOf(dto.getCityCode()));
-        pairs.add(pair1);
-        pairs.add(pair2);
-
-
-        String rett = HttpClientUtil2.sendPost(apiUrl,pairs);
-
-        //ResponseDTO rs = HttpClientUtil.sendPost(url, map);
-        /*Map<String, Object> map = new HashMap<String, Object>();
-        map.put("imgBase64", String.valueOf(dto.getImgBase64()));
-        map.put("cityId", String.valueOf(dto.getCityCode()));
-        String ret = HttpClientUtil2.sendPost(url, map);*/
-        ResponseDTO rs = new ResponseDTO();
         List<GarbageQueryDTO> dms = new ArrayList<>();
         List<GarbageTwoDTO> dts = new ArrayList<>();
         if(rs.isSuccess()) {
@@ -184,8 +127,6 @@ public class GarbageServiceImpl implements GarbageService {
         }
         return builder.toString();
     }
-
-
 
 
     @Override

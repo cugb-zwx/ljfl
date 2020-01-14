@@ -1,188 +1,207 @@
 package com.ljfl.server.common.utils;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.ljfl.server.dto.ResponseDTO;
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.utils.URIBuilder;
-import org.apache.http.entity.StringEntity;
+import org.apache.http.client.methods.HttpRequestBase;
+import org.apache.http.entity.ContentType;
+import org.apache.http.entity.mime.MultipartEntityBuilder;
+import org.apache.http.entity.mime.content.FileBody;
+import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
-import org.apache.http.message.BasicHeader;
-import org.apache.http.message.BasicNameValuePair;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.http.util.EntityUtils;
 
-import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.InputStream;
 import java.util.Map;
-
+import java.util.Set;
 
 /**
- * @Description: java类作用描述
- * @Author: zwx
- * @CreateDate: 2019/12/15 19:40
+ * Title:
+ * Project: 
+ * Description:
+ * Date: 2019-11-21
+ * Copyright: Copyright (c) 2020
+ * Company: 
+ *
+ * @author zwx
+ * @version 1.0
  */
-public class HttpClientUtil {
-    private static final Logger LOGGER = LoggerFactory.getLogger(HttpClientUtil.class);
 
-    public static ResponseDTO sendGet(String url, Map<String, Object> params) {
-        return sendGet(url, getParams(params));
+public class HttpClientUtil {
+
+    /**
+     * http get请求
+     *
+     * @param httpGet
+     * @return
+     */
+    public static String httpGet(HttpGet httpGet) {
+        return send(httpGet);
     }
 
     /**
-     * 发送GET请求
+     * http post请求
      *
-     * @param url               请求url
-     * @param nameValuePairList 请求参数
-     * @return JSON或者字符串
-     * @throws Exception
+     * @param httpPost
+     * @return
      */
-    public static ResponseDTO sendGet(String url, List<NameValuePair> nameValuePairList) {
-        CloseableHttpClient client = null;
-        CloseableHttpResponse response = null;
+    public static String httpPost(HttpPost httpPost) {
+        return send(httpPost);
+    }
+
+    public static String send(HttpRequestBase request) {
+        if (request == null)
+            return "";
+        CloseableHttpClient httpclient = HttpClients.createDefault();
         try {
-            /**
-             * 创建HttpClient对象
-             */
-            client = HttpClients.createDefault();
-            /**
-             * 创建URIBuilder
-             */
-            URIBuilder uriBuilder = new URIBuilder(url);
-            /**
-             * 设置参数
-             */
-            uriBuilder.addParameters(nameValuePairList);
-            /**
-             * 创建HttpGet
-             */
-            HttpGet httpGet = new HttpGet(uriBuilder.build());
-            /**
-             * 设置请求头部编码
-             */
-            httpGet.setHeader(new BasicHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8"));
-            /**
-             * 设置返回编码
-             */
-            httpGet.setHeader(new BasicHeader("Accept", "application/json;charset=utf-8"));
-            /**
-             * 请求服务
-             */
-            response = client.execute(httpGet);
-            /**
-             * 获取response中的内容
-             */
-            String respStr = getResponseStr(response);
-            /**
-             * respStr转换为结果对象
-             */
-            return JSONObject.parseObject(respStr, ResponseDTO.class);
+            CloseableHttpResponse response= httpclient.execute(request);
+            return ParseUtil.getRespContent(response);
         } catch (Exception e) {
-            LOGGER.error("方法: {},参数：{}，异常信息{}", "sendGet", JSON.toJSONString(nameValuePairList), e.getMessage());
+            e.printStackTrace();
         } finally {
             try {
-                response.close();
-                client.close();
+                httpclient.close();
             } catch (IOException e) {
                 e.printStackTrace();
-                LOGGER.error("方法: {},参数：{}，异常信息{}", "sendGet", JSON.toJSONString(nameValuePairList), e.getMessage());
             }
         }
-        return new ResponseDTO();
+        return "";
     }
 
-    public static ResponseDTO sendPost(String url, Map<String, Object> params) {
-        return sendPost(url, getParams(params));
+    public interface HttpClientDownLoadProgress {
+        void onProgress(int progress);
     }
 
     /**
-     * 发送POST请求
+     * 下载文件
      *
      * @param url
-     * @param nameValuePairList
-     * @return JSON或者字符串
-     * @throws Exception
+     * @param filePath
      */
-    public static ResponseDTO sendPost(String url, List<NameValuePair> nameValuePairList) {
-        CloseableHttpClient client = null;
-        CloseableHttpResponse response = null;
+    public void download(final String url, final String filePath) {
+        httpDownloadFile(url, filePath, null, null);
+    }
+
+    /**
+     * 下载文件
+     *
+     * @param url
+     * @param filePath
+     * @param progress 进度回调
+     */
+    public void download(final String url, final String filePath,
+                         final HttpClientDownLoadProgress progress) {
+        httpDownloadFile(url, filePath, progress, null);
+    }
+
+    /**
+     * 下载文件
+     *
+     * @param url
+     * @param filePath
+     */
+    private void httpDownloadFile(String url, String filePath,
+                                  HttpClientDownLoadProgress progress, Map<String, String> headMap) {
+        CloseableHttpClient httpclient = HttpClients.createDefault();
         try {
-            /**
-             *  创建一个httpclient对象
-             */
-            client = HttpClients.createDefault();
-            /**
-             * 创建一个post对象
-             */
-            HttpPost post = new HttpPost(url);
-            /**
-             * 包装成一个Entity对象
-             */
-            StringEntity entity = new UrlEncodedFormEntity(nameValuePairList, "UTF-8");
-            /**
-             * 设置请求的内容
-             */
-            post.setEntity(entity);
-            /**
-             * 设置请求的报文头部的编码
-             */
-            //post.setHeader(new BasicHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8"));
-            post.setHeader(new BasicHeader("Content-Type", "application/json;charset=UTF-8"));
-            /**
-             * 设置请求的报文头部的编码
-             */
-            post.setHeader(new BasicHeader("Accept", "application/json;charset=utf-8"));
-            /**
-             * 执行post请求
-             */
-            response = client.execute(post);
-            /**
-             * 获取response中的内容
-             */
-            String respStr = getResponseStr(response);
-            /**
-             * respStr转换为结果对象
-             */
-            return JSONObject.parseObject(respStr, ResponseDTO.class);
+            HttpGet httpGet = new HttpGet(url);
+            ParseUtil.setRequestHeads(httpGet, headMap);
+            CloseableHttpResponse response1 = httpclient.execute(httpGet);
+            try {
+                HttpEntity httpEntity = response1.getEntity();
+                long contentLength = httpEntity.getContentLength();
+                InputStream is = httpEntity.getContent();
+                // 根据InputStream 下载文件
+                ByteArrayOutputStream output = new ByteArrayOutputStream();
+                byte[] buffer = new byte[4096];
+                int r;
+                long totalRead = 0;
+                while ((r = is.read(buffer)) > 0) {
+                    output.write(buffer, 0, r);
+                    totalRead += r;
+                    if (progress != null) {// 回调进度
+                        progress.onProgress((int) (totalRead * 100 / contentLength));
+                    }
+                }
+                FileOutputStream fos = new FileOutputStream(filePath);
+                output.writeTo(fos);
+                output.flush();
+                output.close();
+                fos.close();
+                EntityUtils.consume(httpEntity);
+            } finally {
+                response1.close();
+            }
         } catch (Exception e) {
-            LOGGER.error("方法: {},参数：{}，异常信息{}", "sendPost", JSON.toJSONString(nameValuePairList), e.getMessage());
+            e.printStackTrace();
         } finally {
             try {
-                response.close();
-                client.close();
+                httpclient.close();
             } catch (IOException e) {
                 e.printStackTrace();
-                LOGGER.error("方法: {},参数：{}，异常信息{}", "sendPost", JSON.toJSONString(nameValuePairList), e.getMessage());
             }
         }
-        return new ResponseDTO();
     }
 
-    private static List<NameValuePair> getParams(Map<String, Object> params) {
-        List<NameValuePair> nameValuePairList = new ArrayList<>();
-        for (Map.Entry<String, Object> entry : params.entrySet()) {
-            nameValuePairList.add(new BasicNameValuePair(entry.getKey(), String.valueOf(entry.getValue())));
+    /**
+     * 上传文件
+     *
+     * @param serverUrl       服务器地址
+     * @param localFilePath   本地文件路径
+     * @param serverFieldName
+     * @param params
+     * @return
+     * @throws Exception
+     */
+    public String uploadFileImpl(String serverUrl, String localFilePath,
+                                 String serverFieldName, Map<String, String> params)
+            throws Exception {
+        String respStr;
+        CloseableHttpClient httpclient = HttpClients.createDefault();
+        try {
+            HttpPost httppost = new HttpPost(serverUrl);
+            FileBody binFileBody = new FileBody(new File(localFilePath));
+
+            MultipartEntityBuilder multipartEntityBuilder = MultipartEntityBuilder
+                    .create();
+            // add the file params
+            multipartEntityBuilder.addPart(serverFieldName, binFileBody);
+            // 设置上传的其他参数
+            setUploadParams(multipartEntityBuilder, params);
+
+            HttpEntity reqEntity = multipartEntityBuilder.build();
+            httppost.setEntity(reqEntity);
+
+            CloseableHttpResponse response = httpclient.execute(httppost);
+            respStr = ParseUtil.getRespContent(response);
+        } finally {
+            httpclient.close();
         }
-        return nameValuePairList;
+        return respStr;
     }
 
-    private static String getResponseStr(HttpResponse response) throws IOException {
-        // 读取为 InputStream，在网页内容数据量大时候推荐使用
-        StringBuilder result = new StringBuilder();
-        BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "utf-8"));
-        String line;
-        while ((line = reader.readLine()) != null) {
-            result.append(line);
+    /**
+     * 设置上传文件时所附带的其他参数
+     *
+     * @param multipartEntityBuilder
+     * @param params
+     */
+    private void setUploadParams(MultipartEntityBuilder multipartEntityBuilder,
+                                 Map<String, String> params) {
+        if (params != null && params.size() > 0) {
+            Set<String> keys = params.keySet();
+            for (String key : keys) {
+                multipartEntityBuilder
+                        .addPart(key, new StringBody(params.get(key),
+                                ContentType.TEXT_PLAIN));
+            }
         }
-        return result.toString();
     }
+
 }
