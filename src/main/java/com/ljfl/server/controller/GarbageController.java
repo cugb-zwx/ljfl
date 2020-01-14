@@ -61,18 +61,6 @@ public class GarbageController {
         return ResponseFactory.buildSuccess("添加成功");
     }
 
-    @ApiOperation(value = "【垃圾】图片识别搜索", httpMethod = "POST", notes = "图片识别搜索", response = GarbageQueryRes.class, responseContainer = "List")
-    @RequestMapping(value = "/Search", method = RequestMethod.POST)
-    public Object Search(@ModelAttribute  GarbageQueryReq req) {
-        GarbageQueryDTO reqDTO = GarbageQueryConverter.reqToDTO(req);
-        List<GarbageQueryDTO> list = garbageBiz.search(reqDTO);
-        List<GarbageQueryRes> resList = list.stream().map(GarbageQueryConverter::dtoToRes).collect(Collectors.toList());
-        if (resList.size() == 0) {
-            return ResponseFactory.buildFailure("相关垃圾分类信息不存在");
-        }
-        return ResponseFactory.buildSuccess(resList);
-    }
-
 
     @ApiOperation(value = "【垃圾】编辑垃圾信息", httpMethod = "POST", notes = "编辑垃圾信息")
     @RequestMapping(value = "/update", method = RequestMethod.POST)

@@ -55,53 +55,55 @@ public class GarbageServiceImpl implements GarbageService {
     @Override
     public List<GarbageQueryDTO> picsearch(GarbageQueryDTO dto) {
 
-        String apiUrl = "https://aiapi.jd.com/jdai/garbageImageSearch";
-        String appkey="3189d4385ef1ddae1b7e7453a7cc56ba";
-        String secretKey = "92be05b65eab00beb1e1c08be18c41c2";
+        //String apiUrl = "https://aiapi.jd.com/jdai/garbageImageSearch";
+        //String appkey="3189d4385ef1ddae1b7e7453a7cc56ba";
+        //String secretKey = "92be05b65eab00beb1e1c08be18c41c2";
         long timestamp = System.currentTimeMillis();
         String sign = Hashing.md5().hashString(secretKey + timestamp, Charset.forName("UTF-8")).toString();
 
         Map<String, String> params = new LinkedHashMap<>();
-        params.put("appkey", appkey);
+        params.put("appkey", appKey);
         params.put("timestamp", String.valueOf(timestamp));
         params.put("sign", sign);
         String url = getRqstUrl(apiUrl, params);
 
         Map<String, String> bodyParams = new LinkedHashMap<>();
-        bodyParams.put("imgBased64", String.valueOf(dto.getImgBase64()));
-        bodyParams.put("cityCode", String.valueOf(dto.getId()));
+        bodyParams.put("imgBase64", String.valueOf(dto.getImgBase64()));
+        bodyParams.put("cityId", String.valueOf(dto.getCityCode()));
 
         Map<String, String> headMap = new HashMap<>();
         headMap.put("Content-Type", "application/json; charset=utf-8");
 
         HttpPost httpPost = ParseUtil.postMethod(url, bodyParams, headMap);
         String resp = HttpClientUtil.httpPost(httpPost);
-        ResponseDTO rs = ParseUtil.parseResponseDTO(resp);
+        //ResponseDTO rs = ParseUtil.parseResponseDTO(resp);
 
         List<GarbageQueryDTO> dms = new ArrayList<>();
         List<GarbageTwoDTO> dts = new ArrayList<>();
-        if(rs.isSuccess()) {
-            JSONObject jsonObject = rs.getData();
-            String result = jsonObject.getString("result");
-            JSONObject jsonObjects = JSON.parseObject(result);
-            //String status = jsonObjects.getString("status");
+
+        JSONObject jsonObject =  JSONObject.parseObject(resp);
+        String result = jsonObject.getString("result");
+        JSONObject jsonObjects = JSON.parseObject(result);
+        String status = jsonObjects.getString("status");
+        if(status.equals("0")){
             JSONArray ja = jsonObjects.getJSONArray("garbage_info");
             for (int i = 0; i < ja.size(); i++) {
                 GarbageTwoDTO dt= new GarbageTwoDTO();
                 GarbageQueryDTO dm= new GarbageQueryDTO();
-                dt.setCityCode(ja.getJSONObject(i).getString("cate_id"));
+                dt.setCityCode(ja.getJSONObject(i).getString("city_id"));
                 dt.setName(ja.getJSONObject(i).getString("garbage_name"));
                 dt.setReMark(ja.getJSONObject(i).getString("ps"));
                 dts.add(dt);
-                dm.setCityCode(ja.getJSONObject(i).getString("cate_id"));
+                dm.setCityCode(ja.getJSONObject(i).getString("city_id"));
                 dm.setName(ja.getJSONObject(i).getString("garbage_name"));
                 dm.setReMark(ja.getJSONObject(i).getString("ps"));
                 dms.add(dm);
             }
-            for (GarbageTwoDTO dt : dts) {
-                //加判断
-                addGarbage(dt);
-            }
+            //添加至数据库
+//            for (GarbageTwoDTO dt : dts) {
+//                //加判断
+//                addGarbage(dt);
+//            }
         }
         return dms ;
     }

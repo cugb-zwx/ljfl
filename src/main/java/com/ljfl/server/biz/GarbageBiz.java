@@ -29,10 +29,6 @@ public class GarbageBiz {
         return garbageService.picsearch(dto);
     }
 
-    public  List<GarbageQueryDTO> search(GarbageQueryDTO dto) {
-        return garbageService.search(dto);
-    }
-
     public void addGarbage(GarbageTwoDTO dto) {
         Date now = new Date();
         dto.setCreateTime(DateUtil.dateToLong(now));
