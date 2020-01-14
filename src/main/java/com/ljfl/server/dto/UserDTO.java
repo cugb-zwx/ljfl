@@ -21,7 +21,9 @@ public class UserDTO {
 
     private String openid;
 
-    private Byte sex;
+    private String code;
+
+  private Byte sex;
 
     private Byte age;
 
@@ -185,5 +187,13 @@ public class UserDTO {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 }

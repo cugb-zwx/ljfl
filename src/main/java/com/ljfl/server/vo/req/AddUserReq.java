@@ -22,6 +22,8 @@ public class AddUserReq extends BaseVO {
     private String passward2;
     @ApiModelProperty("微信openid")
     private String openid;
+    @ApiModelProperty("微信code")
+    private String code;
     @ApiModelProperty("用户性别")
     private Byte sex;
     @ApiModelProperty("用户年龄")
@@ -129,5 +131,13 @@ public class AddUserReq extends BaseVO {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 }

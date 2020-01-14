@@ -1,6 +1,9 @@
 package com.ljfl.server.biz;
 
+import com.ljfl.server.common.exceptions.CustomException;
 import com.ljfl.server.dto.UserDTO;
+import com.ljfl.server.remote.weixin.WeixinLoginUtil;
+import com.ljfl.server.remote.weixin.res.WeiXinLoginRes;
 import com.ljfl.server.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +22,11 @@ public class UserBiz {
     private UserService userService;
 
     public void addUser(UserDTO dto) {
+        WeiXinLoginRes res = WeixinLoginUtil.login(dto.getCode());
+        if (!res.isSuccess()) {
+            throw new CustomException(res.getErrmsg());
+        }
+        dto.setOpenid(res.getOpenid());
         userService.addUser(dto);
     }
 
