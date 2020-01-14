@@ -11,6 +11,7 @@ import java.util.List;
 public interface GarbageService {
     List<GarbageQueryDTO> txtsearch(GarbageQueryDTO dto);
     List<GarbageQueryDTO> picsearch(GarbageQueryDTO dto);
+    List<GarbageQueryDTO> search(GarbageQueryDTO dto);
     void addGarbage(GarbageTwoDTO dto);
     void updateGarbage(GarbageTwoDTO dto);
 }

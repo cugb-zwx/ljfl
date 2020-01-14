@@ -12,10 +12,7 @@ import com.ljfl.server.vo.res.GarbageQueryRes;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -32,7 +29,8 @@ public class GarbageController {
 
     @ApiOperation(value = "【垃圾】文本识别搜索", httpMethod = "GET", notes = "文本识别搜索", response = GarbageQueryRes.class, responseContainer = "List")
     @RequestMapping(value = "/txtSearch", method = RequestMethod.GET)
-    public Object txtSearch(@ModelAttribute GarbageQueryReq req) {
+
+    public Object txtSearch(@ModelAttribute  GarbageQueryReq req) {
         GarbageQueryDTO reqDTO = GarbageQueryConverter.reqToDTO(req);
         List<GarbageQueryDTO> list = garbageBiz.txtsearch(reqDTO);
         List<GarbageQueryRes> resList = list.stream().map(GarbageQueryConverter::dtoToRes).collect(Collectors.toList());
@@ -44,7 +42,7 @@ public class GarbageController {
 
     @ApiOperation(value = "【垃圾】图片识别搜索", httpMethod = "POST", notes = "图片识别搜索", response = GarbageQueryRes.class, responseContainer = "List")
     @RequestMapping(value = "/picSearch", method = RequestMethod.POST)
-    public Object picSearch(@ModelAttribute GarbageQueryReq req) {
+    public Object picSearch(@ModelAttribute  GarbageQueryReq req) {
         GarbageQueryDTO reqDTO = GarbageQueryConverter.reqToDTO(req);
         List<GarbageQueryDTO> list = garbageBiz.picsearch(reqDTO);
         List<GarbageQueryRes> resList = list.stream().map(GarbageQueryConverter::dtoToRes).collect(Collectors.toList());
@@ -62,6 +60,19 @@ public class GarbageController {
         garbageBiz.addGarbage(dto);
         return ResponseFactory.buildSuccess("添加成功");
     }
+
+    @ApiOperation(value = "【垃圾】图片识别搜索", httpMethod = "POST", notes = "图片识别搜索", response = GarbageQueryRes.class, responseContainer = "List")
+    @RequestMapping(value = "/Search", method = RequestMethod.POST)
+    public Object Search(@ModelAttribute  GarbageQueryReq req) {
+        GarbageQueryDTO reqDTO = GarbageQueryConverter.reqToDTO(req);
+        List<GarbageQueryDTO> list = garbageBiz.search(reqDTO);
+        List<GarbageQueryRes> resList = list.stream().map(GarbageQueryConverter::dtoToRes).collect(Collectors.toList());
+        if (resList.size() == 0) {
+            return ResponseFactory.buildFailure("相关垃圾分类信息不存在");
+        }
+        return ResponseFactory.buildSuccess(resList);
+    }
+
 
     @ApiOperation(value = "【垃圾】编辑垃圾信息", httpMethod = "POST", notes = "编辑垃圾信息")
     @RequestMapping(value = "/update", method = RequestMethod.POST)

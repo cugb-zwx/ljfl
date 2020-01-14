@@ -135,7 +135,8 @@ public class HttpClientUtil {
             /**
              * 设置请求的报文头部的编码
              */
-            post.setHeader(new BasicHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8"));
+            //post.setHeader(new BasicHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8"));
+            post.setHeader(new BasicHeader("Content-Type", "application/json;charset=UTF-8"));
             /**
              * 设置请求的报文头部的编码
              */

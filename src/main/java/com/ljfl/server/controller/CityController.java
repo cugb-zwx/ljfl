@@ -54,7 +54,7 @@ public class CityController {
     public Object listCity() {
         List<CityDTO> list = cityBiz.list();
         List<CityRes> resList = list.stream().map(CityConverter::dtoToRes).collect(Collectors.toList());
-        List<Map<String, List<Object>>> letter = cityBiz.op(resList);
+        Map<String, List<Object>> letter = cityBiz.op(resList);
         return ResponseFactory.buildSuccess(letter);
     }
 

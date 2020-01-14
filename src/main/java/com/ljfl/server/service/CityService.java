@@ -13,5 +13,6 @@ import java.util.Map;
 public interface CityService {
     List<CityDTO> list();
     List<GovFileDTO> listGov(GovFileDTO dto);
-    List<Map<String,List<Object>>>op(List<CityRes> list);
+    //List<Map<String,List<Object>>>op(List<CityRes> list);
+    Map<String,List<Object>>op(List<CityRes> list);
 }

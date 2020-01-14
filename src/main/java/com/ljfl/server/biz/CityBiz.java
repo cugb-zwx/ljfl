@@ -25,7 +25,7 @@ public class CityBiz {
     public List<CityDTO> list() {
         return cityService.list();
     }
-    public List<Map<String,List<Object>>>op(List<CityRes> list){
+    public Map<String,List<Object>>op(List<CityRes> list){
         return  cityService.op(list);
     }
 

@@ -52,15 +52,16 @@ public class CityServiceImpl implements CityService {
     }
 
     @Override
-    public List<Map<String,List<Object>>>op(List<CityRes> list) {
+   // public List<Map<String,List<Object>>>op(List<CityRes> list)
+    public Map<String,List<Object>>op(List<CityRes> list){
         //获取首写字母分组排序城市列表
-        List< Map<String, List<Object>>>mapList= new ArrayList<>();
+       // List< Map<String, List<Object>>>mapList= new ArrayList<>();
         Map<String, List<Object>> mapZm = new LinkedHashMap<>();
         //获取热门城市列表
-        Map<String, List<Object>> mapRm = new LinkedHashMap<>();
-        mapList.add(mapRm);
-        mapList.add(mapZm);
-        String[] letter = new String[]{"A", "B", "C", "D", "E", "F", "G", "H", "J", "K", "L", "M",
+       // Map<String, List<Object>> mapRm = new LinkedHashMap<>();
+      //  mapList.add(mapRm);
+        //mapList.add(mapZm);
+        String[] letter = new String[]{"热门","A", "B", "C", "D", "E", "F", "G", "H", "J", "K", "L", "M",
                 "N", "P", "Q", "R", "S", "T", "W", "X", "Y", "Z"};
         //创建按首字母大写为key的map集合,Map("A",list1),Map("B",list2)
         for (int i = 0; i < letter.length; i++) {
@@ -76,15 +77,15 @@ public class CityServiceImpl implements CityService {
             }
             if (ps.equals("1"))//“热门”
             {
-                List <Object> rm=mapRm.get("热门");
+                List <Object> rm=mapZm.get("热门");
                 if(rm==null){
                     rm=new ArrayList<>();
-                    mapRm.put("热门",rm);
+                    mapZm.put("热门",rm);
                 }
                 rm.add(c);
             }
         }
-        return mapList;
+        return mapZm;
     }
 }
 
