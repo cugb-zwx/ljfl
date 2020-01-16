@@ -20,8 +20,6 @@ public class AddUserReq extends BaseVO {
     private String passward;
     @ApiModelProperty("用户密码2")
     private String passward2;
-    @ApiModelProperty("微信openid")
-    private String openid;
     @ApiModelProperty("微信code")
     private String code;
     @ApiModelProperty("用户性别")
@@ -75,14 +73,6 @@ public class AddUserReq extends BaseVO {
 
     public void setPassward2(String passward2) {
         this.passward2 = passward2;
-    }
-
-    public String getOpenid() {
-        return openid;
-    }
-
-    public void setOpenid(String openid) {
-        this.openid = openid;
     }
 
     public Byte getSex() {

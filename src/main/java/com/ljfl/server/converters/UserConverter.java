@@ -24,7 +24,6 @@ public class UserConverter {
         userDTO.setHeadImg(req.getHeadImg());
         userDTO.setPassward(req.getPassward());
         userDTO.setPassward2(req.getPassward2());
-        userDTO.setOpenid(req.getOpenid());
         userDTO.setCode(req.getCode());
         userDTO.setSex(req.getSex());
         userDTO.setAge(req.getAge());

@@ -1,11 +1,8 @@
 package com.ljfl.server.remote.weixin;
 
 import com.alibaba.fastjson.JSON;
-import com.ljfl.server.common.utils.HttpClientUtil;
 import com.ljfl.server.common.utils.HttpsClientUtil;
-import com.ljfl.server.common.utils.ParseUtil;
 import com.ljfl.server.remote.weixin.res.WeiXinLoginRes;
-import org.apache.http.client.methods.HttpGet;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
