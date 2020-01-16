@@ -22,15 +22,15 @@ public class AddUserReq extends BaseVO {
     private String passward2;
     @ApiModelProperty("微信code")
     private String code;
-    @ApiModelProperty("用户性别")
+    @ApiModelProperty("用户性别 0 女，1 男")
     private Byte sex;
-    @ApiModelProperty("用户年龄")
+    @ApiModelProperty("用户年龄 1-100")
     private Byte age;
     @ApiModelProperty("用户城市编码")
     private String cityCode;
-    @ApiModelProperty("用户手机号")
+    @ApiModelProperty("用户手机号 11位数字")
     private String mobile;
-    @ApiModelProperty("用户状态")
+    @ApiModelProperty("用户状态 0 未删除 1 已删除")
     private String isDelete;
     @ApiModelProperty("用户备注")
     private String note;

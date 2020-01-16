@@ -19,8 +19,6 @@ public class UserRes extends BaseVO {
     private String nickName;
     @ApiModelProperty("用户头像")
     private String headImg;
-    @ApiModelProperty("微信openid")
-    private String openid;
     @ApiModelProperty("用户性别 1男 0女")
     private Boolean sex;
     @ApiModelProperty("用户年龄")
@@ -74,14 +72,6 @@ public class UserRes extends BaseVO {
 
     public void setHeadImg(String headImg) {
         this.headImg = headImg;
-    }
-
-    public String getOpenid() {
-        return openid;
-    }
-
-    public void setOpenid(String openid) {
-        this.openid = openid;
     }
 
     public Boolean getSex() {

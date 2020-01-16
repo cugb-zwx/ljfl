@@ -8,11 +8,11 @@ import com.ljfl.server.dto.UserDTO;
 import com.ljfl.server.dto.UserSignDTO;
 import com.ljfl.server.vo.base.response.ResponseFactory;
 import com.ljfl.server.vo.req.AddUserReq;
+import com.ljfl.server.vo.req.CodeReq;
 import com.ljfl.server.vo.req.IdReq;
-import com.ljfl.server.vo.req.OpenidReq;
 import com.ljfl.server.vo.req.check.AddUserReqCheck;
+import com.ljfl.server.vo.req.check.CodeReqCheck;
 import com.ljfl.server.vo.req.check.IdReqCheck;
-import com.ljfl.server.vo.req.check.OpenidReqCheck;
 import com.ljfl.server.vo.res.UserRes;
 import com.ljfl.server.vo.res.UserSignRes;
 import io.swagger.annotations.Api;
@@ -42,16 +42,28 @@ public class UserController {
     @Autowired
     private UserSignBiz userSignBiz;
 
+    @ApiOperation(value = "【用户】用户登录", httpMethod = "POST", notes = "用户登录")
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public Object login(@ModelAttribute CodeReq req) {
+        String cRes = CodeReqCheck.check(req);
+        if (StringUtils.isNotBlank(cRes)) {
+            return ResponseFactory.buildFailure(cRes);
+        }
+        UserDTO dto = UserConverter.reqToDTO(req);
+        String userId = userBiz.login(dto);
+        return ResponseFactory.buildSuccess("用户登录成功", userId);
+    }
+
     @ApiOperation(value = "【用户】新建用户", httpMethod = "POST", notes = "新建用户")
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public Object add(@ModelAttribute AddUserReq req) {
+    public Object addUser(@ModelAttribute AddUserReq req) {
         String cRes = AddUserReqCheck.check(req);
         if (StringUtils.isNotBlank(cRes)) {
             return ResponseFactory.buildFailure(cRes);
         }
         UserDTO dto = UserConverter.reqToDTO(req);
-        userBiz.addUser(dto);
-        return ResponseFactory.buildSuccess("用户创建成功");
+        String userId = userBiz.addUser(dto);
+        return ResponseFactory.buildSuccess("用户创建成功", userId);
     }
 
     @ApiOperation(value = "【用户】查询用户信息", httpMethod = "GET", notes = "查询用户信息", response = UserRes.class)
@@ -71,8 +83,8 @@ public class UserController {
 
     @ApiOperation(value = "【用户】检测用户", httpMethod = "GET", notes = "检测用户是否存在")
     @RequestMapping("/isHas")
-    public Object isHas(@ModelAttribute OpenidReq req) {
-        String cRes = OpenidReqCheck.check(req);
+    public Object isHas(@ModelAttribute CodeReq req) {
+        String cRes = CodeReqCheck.check(req);
         if (StringUtils.isNotBlank(cRes)) {
             return ResponseFactory.buildFailure(cRes);
         }

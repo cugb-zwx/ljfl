@@ -8,7 +8,9 @@ import com.ljfl.server.dto.UserDTO;
  * @CreateDate: 2019/12/13 21:24
  */
 public interface UserService {
-    void addUser(UserDTO dto);
+    String login(UserDTO dto);
+
+    String addUser(UserDTO dto);
 
     void updateUser(UserDTO dto);
 

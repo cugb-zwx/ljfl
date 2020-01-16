@@ -21,13 +21,14 @@ public class UserBiz {
     @Autowired
     private UserService userService;
 
-    public void addUser(UserDTO dto) {
-        WeiXinLoginRes res = WeixinLoginUtil.login(dto.getCode());
-        if (!res.isSuccess()) {
-            throw new CustomException(res.getErrmsg());
-        }
-        dto.setOpenid(res.getOpenid());
-        userService.addUser(dto);
+    public String login(UserDTO dto) {
+        dto.setOpenid(wxLogin(dto));
+        return userService.login(dto);
+    }
+
+    public String addUser(UserDTO dto) {
+        dto.setOpenid(wxLogin(dto));
+        return userService.addUser(dto);
     }
 
     public UserDTO getUser(UserDTO dto) {
@@ -35,6 +36,15 @@ public class UserBiz {
     }
 
     public boolean isHasUser(UserDTO dto) {
+        dto.setOpenid(wxLogin(dto));
         return userService.isHasUser(dto);
+    }
+
+    private String wxLogin(UserDTO dto) {
+        WeiXinLoginRes res = WeixinLoginUtil.login(dto.getCode());
+        if (!res.isSuccess()) {
+            throw new CustomException(res.getErrmsg());
+        }
+        return res.getOpenid();
     }
 }
