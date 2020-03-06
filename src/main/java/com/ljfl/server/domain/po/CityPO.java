@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class CityPO implements Serializable {
-    private String id;
+    private Integer id;
 
     private String code;
 
@@ -24,13 +24,15 @@ public class CityPO implements Serializable {
 
     private String note;
 
+    private Boolean ps;
+
     private static final long serialVersionUID = 1L;
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -62,7 +64,9 @@ public class CityPO implements Serializable {
         return provinceCode;
     }
 
-    public void setProvinceCode(String provinceCode) {this.provinceCode = provinceCode == null ? null : provinceCode.trim();}
+    public void setProvinceCode(String provinceCode) {
+        this.provinceCode = provinceCode == null ? null : provinceCode.trim();
+    }
 
     public Boolean getState() {
         return state;
@@ -102,5 +106,13 @@ public class CityPO implements Serializable {
 
     public void setNote(String note) {
         this.note = note == null ? null : note.trim();
+    }
+
+    public Boolean getPs() {
+        return ps;
+    }
+
+    public void setPs(Boolean ps) {
+        this.ps = ps;
     }
 }

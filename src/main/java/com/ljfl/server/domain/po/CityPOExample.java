@@ -764,6 +764,66 @@ public class CityPOExample {
             addCriterion("note not between", value1, value2, "note");
             return (Criteria) this;
         }
+
+        public Criteria andPsIsNull() {
+            addCriterion("ps is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPsIsNotNull() {
+            addCriterion("ps is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPsEqualTo(Boolean value) {
+            addCriterion("ps =", value, "ps");
+            return (Criteria) this;
+        }
+
+        public Criteria andPsNotEqualTo(Boolean value) {
+            addCriterion("ps <>", value, "ps");
+            return (Criteria) this;
+        }
+
+        public Criteria andPsGreaterThan(Boolean value) {
+            addCriterion("ps >", value, "ps");
+            return (Criteria) this;
+        }
+
+        public Criteria andPsGreaterThanOrEqualTo(Boolean value) {
+            addCriterion("ps >=", value, "ps");
+            return (Criteria) this;
+        }
+
+        public Criteria andPsLessThan(Boolean value) {
+            addCriterion("ps <", value, "ps");
+            return (Criteria) this;
+        }
+
+        public Criteria andPsLessThanOrEqualTo(Boolean value) {
+            addCriterion("ps <=", value, "ps");
+            return (Criteria) this;
+        }
+
+        public Criteria andPsIn(List<Boolean> values) {
+            addCriterion("ps in", values, "ps");
+            return (Criteria) this;
+        }
+
+        public Criteria andPsNotIn(List<Boolean> values) {
+            addCriterion("ps not in", values, "ps");
+            return (Criteria) this;
+        }
+
+        public Criteria andPsBetween(Boolean value1, Boolean value2) {
+            addCriterion("ps between", value1, value2, "ps");
+            return (Criteria) this;
+        }
+
+        public Criteria andPsNotBetween(Boolean value1, Boolean value2) {
+            addCriterion("ps not between", value1, value2, "ps");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

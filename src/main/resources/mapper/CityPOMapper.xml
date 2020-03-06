@@ -12,6 +12,7 @@
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
     <result column="is_delete" property="isDelete" jdbcType="VARCHAR" />
     <result column="note" property="note" jdbcType="VARCHAR" />
+    <result column="ps" property="ps" jdbcType="BIT" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.ljfl.server.domain.po.CityPOWithBLOBs" extends="BaseResultMap" >
     <result column="reg" property="reg" jdbcType="LONGVARCHAR" />
@@ -76,7 +77,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, code, name, py, province_code, state, create_time, update_time, is_delete, note
+    id, code, name, py, province_code, state, create_time, update_time, is_delete, note, 
+    ps
   </sql>
   <sql id="Blob_Column_List" >
     reg, puh
@@ -133,12 +135,12 @@
     insert into city (id, code, name, 
       py, province_code, state, 
       create_time, update_time, is_delete, 
-      note, reg, puh
+      note, ps, reg, puh
       )
     values (#{id,jdbcType=INTEGER}, #{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
       #{py,jdbcType=VARCHAR}, #{provinceCode,jdbcType=VARCHAR}, #{state,jdbcType=BIT}, 
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{isDelete,jdbcType=VARCHAR}, 
-      #{note,jdbcType=VARCHAR}, #{reg,jdbcType=LONGVARCHAR}, #{puh,jdbcType=LONGVARCHAR}
+      #{note,jdbcType=VARCHAR}, #{ps,jdbcType=BIT}, #{reg,jdbcType=LONGVARCHAR}, #{puh,jdbcType=LONGVARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.ljfl.server.domain.po.CityPOWithBLOBs" >
@@ -173,6 +175,9 @@
       </if>
       <if test="note != null" >
         note,
+      </if>
+      <if test="ps != null" >
+        ps,
       </if>
       <if test="reg != null" >
         reg,
@@ -211,6 +216,9 @@
       </if>
       <if test="note != null" >
         #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="ps != null" >
+        #{ps,jdbcType=BIT},
       </if>
       <if test="reg != null" >
         #{reg,jdbcType=LONGVARCHAR},
@@ -259,6 +267,9 @@
       <if test="record.note != null" >
         note = #{record.note,jdbcType=VARCHAR},
       </if>
+      <if test="record.ps != null" >
+        ps = #{record.ps,jdbcType=BIT},
+      </if>
       <if test="record.reg != null" >
         reg = #{record.reg,jdbcType=LONGVARCHAR},
       </if>
@@ -282,6 +293,7 @@
       update_time = #{record.updateTime,jdbcType=TIMESTAMP},
       is_delete = #{record.isDelete,jdbcType=VARCHAR},
       note = #{record.note,jdbcType=VARCHAR},
+      ps = #{record.ps,jdbcType=BIT},
       reg = #{record.reg,jdbcType=LONGVARCHAR},
       puh = #{record.puh,jdbcType=LONGVARCHAR}
     <if test="_parameter != null" >
@@ -299,7 +311,8 @@
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP},
       is_delete = #{record.isDelete,jdbcType=VARCHAR},
-      note = #{record.note,jdbcType=VARCHAR}
+      note = #{record.note,jdbcType=VARCHAR},
+      ps = #{record.ps,jdbcType=BIT}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -334,6 +347,9 @@
       <if test="note != null" >
         note = #{note,jdbcType=VARCHAR},
       </if>
+      <if test="ps != null" >
+        ps = #{ps,jdbcType=BIT},
+      </if>
       <if test="reg != null" >
         reg = #{reg,jdbcType=LONGVARCHAR},
       </if>
@@ -354,6 +370,7 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       is_delete = #{isDelete,jdbcType=VARCHAR},
       note = #{note,jdbcType=VARCHAR},
+      ps = #{ps,jdbcType=BIT},
       reg = #{reg,jdbcType=LONGVARCHAR},
       puh = #{puh,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
@@ -368,7 +385,8 @@
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       is_delete = #{isDelete,jdbcType=VARCHAR},
-      note = #{note,jdbcType=VARCHAR}
+      note = #{note,jdbcType=VARCHAR},
+      ps = #{ps,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -8,7 +8,7 @@ import io.swagger.annotations.ApiModelProperty;
  */
 public class GovFileRes extends BaseVO{
     @ApiModelProperty("城市ID")
-    private String id;
+    private Integer id;
     @ApiModelProperty("城市名称")
     private String name;
     @ApiModelProperty("官方意见")
@@ -22,11 +22,11 @@ public class GovFileRes extends BaseVO{
     @ApiModelProperty("城市备注")
     private String note;
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
