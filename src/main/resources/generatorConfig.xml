@@ -7,8 +7,6 @@
 
     <context id="sqlserverTables" targetRuntime="MyBatis3">
         <!-- 生成的pojo，将implements Serializable-->
-        <!--覆盖生成XML文件-->
-        <!--<plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin" />-->
         <plugin type="org.mybatis.generator.plugins.SerializablePlugin"></plugin>
 
         <commentGenerator>
@@ -56,7 +54,7 @@
         </javaClientGenerator>
 
         <!--<table tableName="user" domainObjectName="UserPO"/>-->
-        <table tableName="city" domainObjectName="CityPO"/>
+        <!--<table tableName="city" domainObjectName="CityPO"/>-->
         <!--<table tableName="province" domainObjectName="ProvincePO"/>-->
         <!--<table tableName="user_garbage" domainObjectName="UserGarbagePO"/>-->
         <!--<table tableName="garbage_one" domainObjectName="GarbageOnePO"/>-->
