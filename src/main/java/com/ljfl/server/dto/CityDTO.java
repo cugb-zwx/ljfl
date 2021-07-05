@@ -9,7 +9,7 @@ public class CityDTO {
 
     private static final long serialVersionUID = 1L;
 
-    private String id;
+    private Integer id;
 
     private String code;
 
@@ -29,12 +29,11 @@ public class CityDTO {
 
     private String note;
 
-
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

@@ -1,6 +1,5 @@
 package com.ljfl.server.biz;
 
-import com.ljfl.server.domain.po.CityPO;
 import com.ljfl.server.dto.CityDTO;
 import com.ljfl.server.dto.GovFileDTO;
 import com.ljfl.server.service.CityService;

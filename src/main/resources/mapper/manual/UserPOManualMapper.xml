@@ -32,4 +32,9 @@
     <select id="countUser" resultType="java.lang.Long">
         select count(*) from user  where is_delete='0' and openid = #{openid,jdbcType=VARCHAR}
     </select>
+    <select id="getUserByOpenid" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from user where is_delete='0' and and openid = #{openid,jdbcType=VARCHAR}
+    </select>
 </mapper>

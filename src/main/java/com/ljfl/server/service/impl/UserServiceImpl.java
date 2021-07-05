@@ -1,5 +1,7 @@
 package com.ljfl.server.service.impl;
 
+import com.ljfl.server.common.constants.UserExceptionConstant;
+import com.ljfl.server.common.exceptions.CustomException;
 import com.ljfl.server.common.utils.UUIDUtil;
 import com.ljfl.server.converters.UserConverter;
 import com.ljfl.server.dao.mapper.UserPOMapper;
@@ -26,10 +28,25 @@ public class UserServiceImpl implements UserService {
     private UserPOManualMapper userPOManualMapper;
 
     @Override
-    public void addUser(UserDTO dto) {
+    public String login(UserDTO dto) {
+        UserPO userPO = getUserByOpenid(dto.getOpenid());
+        if (userPO == null) {
+            throw new CustomException(UserExceptionConstant.empty);
+        }
+        return userPO.getId();
+    }
+
+    private UserPO getUserByOpenid(String openid) {
+        if (StringUtils.isBlank(openid)) return null;
+        return userPOManualMapper.getUserByOpenid(openid);
+    }
+
+    @Override
+    public String addUser(UserDTO dto) {
+        if (dto.getId() == null) dto.setId(UUIDUtil.getUUID());
         UserPO po = UserConverter.dtoToPO(dto);
-        if (po.getId() == null) po.setId(UUIDUtil.getUUID());
         userPOMapper.insertSelective(po);
+        return po.getId();
     }
 
     @Override

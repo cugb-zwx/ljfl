@@ -7,8 +7,8 @@ package com.ljfl.server.vo.req.check.constant;
  */
 public class CheckConstant {
 
-    public static final String empty_str="";
+    public static final String empty_str = "";
 
-    public static final String empty_openid = "openid不能为空";
+    public static final String empty_openid = "用户登录code不能为空";
 
 }

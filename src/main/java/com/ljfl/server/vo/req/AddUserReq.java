@@ -20,17 +20,17 @@ public class AddUserReq extends BaseVO {
     private String passward;
     @ApiModelProperty("用户密码2")
     private String passward2;
-    @ApiModelProperty("微信openid")
-    private String openid;
-    @ApiModelProperty("用户性别")
-    private Boolean sex;
-    @ApiModelProperty("用户年龄")
+    @ApiModelProperty("微信code")
+    private String code;
+    @ApiModelProperty("用户性别 0 女，1 男")
+    private Byte sex;
+    @ApiModelProperty("用户年龄 1-100")
     private Byte age;
     @ApiModelProperty("用户城市编码")
     private String cityCode;
-    @ApiModelProperty("用户手机号")
+    @ApiModelProperty("用户手机号 11位数字")
     private String mobile;
-    @ApiModelProperty("用户状态")
+    @ApiModelProperty("用户状态 0 未删除 1 已删除")
     private String isDelete;
     @ApiModelProperty("用户备注")
     private String note;
@@ -75,19 +75,11 @@ public class AddUserReq extends BaseVO {
         this.passward2 = passward2;
     }
 
-    public String getOpenid() {
-        return openid;
-    }
-
-    public void setOpenid(String openid) {
-        this.openid = openid;
-    }
-
-    public Boolean getSex() {
+    public Byte getSex() {
         return sex;
     }
 
-    public void setSex(Boolean sex) {
+    public void setSex(Byte sex) {
         this.sex = sex;
     }
 
@@ -129,5 +121,13 @@ public class AddUserReq extends BaseVO {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 }

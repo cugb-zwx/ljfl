@@ -1,9 +1,8 @@
 package com.ljfl.server.dao.mapper;
 
-import java.util.List;
-
 import com.ljfl.server.domain.po.UserPO;
 import com.ljfl.server.domain.po.UserPOExample;
+import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface UserPOMapper {

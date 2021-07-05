@@ -21,7 +21,9 @@ public class UserDTO {
 
     private String openid;
 
-    private Boolean sex;
+    private String code;
+
+  private Byte sex;
 
     private Byte age;
 
@@ -99,11 +101,11 @@ public class UserDTO {
         this.openid = openid;
     }
 
-    public Boolean getSex() {
+    public Byte getSex() {
         return sex;
     }
 
-    public void setSex(Boolean sex) {
+    public void setSex(Byte sex) {
         this.sex = sex;
     }
 
@@ -185,5 +187,13 @@ public class UserDTO {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 }

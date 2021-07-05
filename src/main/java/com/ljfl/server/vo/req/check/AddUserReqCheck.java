@@ -15,7 +15,7 @@ public class AddUserReqCheck {
     public static final String empty_nickName = "用户昵称不能为空";
 
     public static String check(AddUserReq req) {
-        if (StringUtils.isBlank(req.getOpenid())) return CheckConstant.empty_openid;
+        if (StringUtils.isBlank(req.getCode())) return CheckConstant.empty_openid;
         if (StringUtils.isBlank(req.getName())) return empty_name;
         if (StringUtils.isBlank(req.getNickName())) return empty_nickName;
         return CheckConstant.empty_str;

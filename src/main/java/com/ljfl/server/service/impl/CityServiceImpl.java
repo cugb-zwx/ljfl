@@ -1,9 +1,7 @@
 package com.ljfl.server.service.impl;
 
-import com.ljfl.server.common.utils.UUIDUtil;
 import com.ljfl.server.converters.CityConverter;
 import com.ljfl.server.converters.GovFileConverter;
-import com.ljfl.server.converters.UserSignConverter;
 import com.ljfl.server.dao.mapper.CityPOMapper;
 import com.ljfl.server.domain.po.CityPO;
 import com.ljfl.server.domain.po.CityPOExample;
@@ -12,11 +10,9 @@ import com.ljfl.server.dto.CityDTO;
 import com.ljfl.server.dto.GovFileDTO;
 import com.ljfl.server.service.CityService;
 import com.ljfl.server.vo.res.CityRes;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.awt.*;
 import java.util.*;
 import java.util.List;
 import java.util.stream.Collectors;

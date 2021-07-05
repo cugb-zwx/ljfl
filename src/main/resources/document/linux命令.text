@@ -1,0 +1,12 @@
+永久开发指导端口
+/sbin/iptables -I INPUT -p tcp --dport 443 -j ACCEPT
+/etc/rc.d/init.d/iptables save
+/etc/init.d/iptables restart
+/sbin/iptables -L -n
+查看端口号
+netstat -ntulp |grep 9090   //查看所有1935端口使用情况
+
+替换文件中的非法字符（ ./run.sh: /bin/bash^M: bad interpreter: 没有那个文件或目录）
+sed -i 's/\r$//' run.sh
+启动项目
+./run.sh  start|stop|restart|status dev|online|offline|test

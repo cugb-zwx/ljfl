@@ -4,8 +4,8 @@ import com.ljfl.server.common.utils.DateUtil;
 import com.ljfl.server.domain.po.UserPO;
 import com.ljfl.server.dto.UserDTO;
 import com.ljfl.server.vo.req.AddUserReq;
+import com.ljfl.server.vo.req.CodeReq;
 import com.ljfl.server.vo.req.IdReq;
-import com.ljfl.server.vo.req.OpenidReq;
 import com.ljfl.server.vo.res.UserRes;
 
 /**
@@ -24,7 +24,7 @@ public class UserConverter {
         userDTO.setHeadImg(req.getHeadImg());
         userDTO.setPassward(req.getPassward());
         userDTO.setPassward2(req.getPassward2());
-        userDTO.setOpenid(req.getOpenid());
+        userDTO.setCode(req.getCode());
         userDTO.setSex(req.getSex());
         userDTO.setAge(req.getAge());
         userDTO.setCityCode(req.getCityCode());
@@ -34,21 +34,21 @@ public class UserConverter {
         return userDTO;
     }
 
-    public static UserDTO reqToDTO(OpenidReq req) {
-        if (req == null) {
-            return null;
-        }
-        UserDTO userDTO = new UserDTO();
-        userDTO.setOpenid(req.getOpenid());
-        return userDTO;
-    }
-
     public static UserDTO reqToDTO(IdReq req) {
         if (req == null) {
             return null;
         }
         UserDTO userDTO = new UserDTO();
         userDTO.setId(req.getId());
+        return userDTO;
+    }
+
+    public static UserDTO reqToDTO(CodeReq req) {
+        if (req == null) {
+            return null;
+        }
+        UserDTO userDTO = new UserDTO();
+        userDTO.setCode(req.getCode());
         return userDTO;
     }
 
@@ -63,7 +63,7 @@ public class UserConverter {
         userPO.setHeadImg(dto.getHeadImg());
         userPO.setPassward(dto.getPassward());
         userPO.setOpenid(dto.getOpenid());
-        userPO.setSex(dto.getSex());
+        userPO.setSex(Byte.valueOf("0").equals(dto.getSex()) ? false : true);
         userPO.setAge(dto.getAge());
         userPO.setLoginTime(DateUtil.longToDate(dto.getLoginTime()));
         userPO.setCityCode(dto.getCityCode());
@@ -88,7 +88,7 @@ public class UserConverter {
         userDTO.setHeadImg(po.getHeadImg());
         userDTO.setPassward(po.getPassward());
         userDTO.setOpenid(po.getOpenid());
-        userDTO.setSex(po.getSex());
+        userDTO.setSex(Boolean.FALSE.equals(po.getSex()) ? Byte.valueOf("0") : Byte.valueOf("1"));
         userDTO.setAge(po.getAge());
         userDTO.setLoginTime(DateUtil.dateToLong(po.getLoginTime()));
         userDTO.setCityCode(po.getCityCode());
@@ -111,8 +111,7 @@ public class UserConverter {
         userRes.setName(dto.getName());
         userRes.setNickName(dto.getNickName());
         userRes.setHeadImg(dto.getHeadImg());
-        userRes.setOpenid(dto.getOpenid());
-        userRes.setSex(dto.getSex());
+        userRes.setSex(Byte.valueOf("0").equals(dto.getSex()) ? false : true);
         userRes.setAge(dto.getAge());
         userRes.setLoginTime(dto.getLoginTime());
         userRes.setCityCode(dto.getCityCode());
